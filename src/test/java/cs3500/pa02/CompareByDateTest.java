@@ -1,4 +1,4 @@
-package cs3500.pa01;
+package cs3500.pa02;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -8,9 +8,9 @@ import java.nio.file.attribute.FileTime;
 import org.junit.jupiter.api.Test;
 
 /**
- * Class for testing CompareByModified and its related methods
+ * Testing the CompareByDate class and its associated methods
  */
-public class CompareByModifiedTest {
+class CompareByDateTest {
 
   /**
    * Tests the compare method
@@ -25,8 +25,9 @@ public class CompareByModifiedTest {
     MarkDownFile two = new MarkDownFile(vectors,
         FileTime.fromMillis(1683851000934L),
         FileTime.fromMillis(1683865690271L));
-    CompareByModified cbm = new CompareByModified();
-    assertEquals(-1, cbm.compare(one, two));
-    assertEquals(1, cbm.compare(two, one));
+    CompareByDate cbd = new CompareByDate();
+    assertEquals(-1, cbd.compare(one, two));
+    assertEquals(1, cbd.compare(two, one));
   }
+
 }

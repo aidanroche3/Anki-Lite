@@ -1,4 +1,4 @@
-package cs3500.pa01;
+package cs3500.pa02;
 
 /**
  * Class for formatting a String of combined files into a summary

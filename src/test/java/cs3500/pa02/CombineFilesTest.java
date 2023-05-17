@@ -1,15 +1,45 @@
-package cs3500.pa01;
+package cs3500.pa02;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
+import java.io.File;
+import java.nio.file.Path;
+import java.util.ArrayList;
+import java.util.Arrays;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 /**
- * Class for testing FormatFiles and its associated methods
+ * Test class for CombineFiles and its associated methods
  */
-class FormatFileTest {
+class CombineFilesTest {
 
-  String arraysAndTest = """ 
+  File arrays;
+  File test;
+  File vectors;
+  File java;
+  File fake;
+  ArrayList<File> twoFiles;
+  ArrayList<File> files;
+  ArrayList<File> withFake;
+  String arraysAndTest;
+  String allCombined;
+
+  /**
+   * Initializes the data for tests
+   */
+  @BeforeEach
+  public void setup() {
+    arrays = Path.of("src/tests/resources/notes-root/arrays.md").toFile();
+    test = Path.of("src/tests/resources/notes-root/test.md").toFile();
+    vectors = Path.of("src/tests/resources/notes-root/vectors.md").toFile();
+    java = Path.of("src/tests/resources/notes-root/lecture-notes/java.md").toFile();
+    fake = Path.of("src/tests/resources/notes-root/nonexistent.md").toFile();
+    twoFiles = new ArrayList<>(Arrays.asList(test, arrays));
+    files = new ArrayList<>(Arrays.asList(arrays, test, vectors, java));
+    withFake = new ArrayList<>(Arrays.asList(test, fake));
+    arraysAndTest = """ 
         # This is a test file
                 
         ## Heading
@@ -37,7 +67,7 @@ class FormatFileTest {
         ... more brilliance captured...\s
         
         """;
-  String allCombined = """
+    allCombined = """
         # Java Arrays
         - [[An **array** is a collection of variables of the same type]], referred to
           by a common name.
@@ -47,8 +77,8 @@ class FormatFileTest {
         - [[General Form: type[] arrayName;]]
         - ex: int[] myData;
 
-        - The above only creates a reference to an array object, [[but no array has
-         actually been created yet.]]
+        - The above only creates a reference to an array object, but no array has
+          actually been created yet.
 
         ## Creating an Array (Instantiation)
         - [[General form:  arrayName = new type[numberOfElements];]]
@@ -92,66 +122,22 @@ class FormatFileTest {
         - C/C++ style syntax
         
         """;
-  String arraysAndTestSummarized = """
-      # This is a test file
-      
-      ## Heading
-      
-      # Java Arrays
-      - An **array** is a collection of variables of the same type
-      
-      ## Declaring an Array
-      - General Form: type[] arrayName;
-      
-      ## Creating an Array (Instantiation)
-      - General form:  arrayName = new type[numberOfElements];
-      - numberOfElements must be a positive Integer.
-      - Gotcha: Array size is not modifiable once instantiated.\s
-      """;
-  String allCombinedSummarized = """
-      # Java Arrays
-      - An **array** is a collection of variables of the same type
-            
-      ## Declaring an Array
-      - General Form: type[] arrayName;
-      - but no array has actually been created yet.
-            
-      ## Creating an Array (Instantiation)
-      - General form:  arrayName = new type[numberOfElements];
-      - numberOfElements must be a positive Integer.
-      - Gotcha: Array size is not modifiable once instantiated.\s
-            
-      # This is a test file
-            
-      ## Heading
-            
-      # Vectors
-      - Vectors act like resizable arrays
-            
-      ## Declaring a vector
-      - General Form: Vector<type> v = new Vector();
-      - type needs to be a valid reference type
-            
-      ## Adding an element to a vector
-      - v.add(object of type);
-            
-      # Java Basics
-      -  Object-oriented\s
-            
-      ## History
-      -  May 1995\s
-            
-      ### Similarities
-      """;
+  }
 
   /**
-   * Tests for the summarizeContent method
+   * Tests the getCombinedFiles method
    */
   @Test
-  public void testSummarizeContent() {
-    FormatFile arrays = new FormatFile(arraysAndTest);
-    FormatFile all = new FormatFile(allCombined);
-    assertEquals(arraysAndTestSummarized, arrays.summarizeContent());
-    assertEquals(allCombinedSummarized, all.summarizeContent());
+  public void testGetCombinedFiles() {
+    CombineFiles one = new CombineFiles(twoFiles);
+    CombineFiles two = new CombineFiles(files);
+    String twoCombined;
+    String fourCombined;
+    twoCombined = one.getCombinedFiles();
+    fourCombined = two.getCombinedFiles();
+    CombineFiles three = new CombineFiles(withFake);
+    assertEquals(arraysAndTest, twoCombined);
+    assertEquals(allCombined, fourCombined);
+    assertThrows(RuntimeException.class, three::getCombinedFiles);
   }
 }
