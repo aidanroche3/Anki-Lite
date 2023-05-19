@@ -64,6 +64,8 @@ class DriverTest {
     String[] validArgs = {"src/tests/resources/notes-root",
         "filename", "src/tests/resources/outputDirectory/summary.md"};
     assertDoesNotThrow(() -> Driver.main(validArgs));
+    String[] emptyArgs = {};
+    assertDoesNotThrow(() -> Driver.main(emptyArgs));
   }
 
 }

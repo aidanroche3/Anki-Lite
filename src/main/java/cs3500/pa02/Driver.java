@@ -1,5 +1,6 @@
 package cs3500.pa02;
 
+import cs3500.pa02.controllers.StudySessionController;
 import cs3500.pa02.fileformatters.QuestionAndAnswer;
 import cs3500.pa02.fileformatters.StudyGuide;
 import cs3500.pa02.fileutilities.CombineFiles;
@@ -19,6 +20,7 @@ import java.util.List;
  */
 public class Driver {
 
+  private static Mode mode;
   private static Path rootPath;
   private static String orderFlag;
   private static Path outputPath;
@@ -34,9 +36,16 @@ public class Driver {
   public static void main(String[] args) {
     // validating that the arguments passed in are valid
     validateArgs(args);
-    // creates the summary of the root path files at the output path according to the order flag
-    summarize(rootPath, orderFlag, outputPath);
-    System.out.println("Successfully summarized files of " + rootPath + " at " + outputPath);
+
+    // initiates the correct mode
+    switch (mode) {
+      case STUDYGUIDE -> {
+        summarize(rootPath, orderFlag, outputPath);
+        System.out.println("Successfully summarized files of " + rootPath + " at " + outputPath);
+      }
+      case STUDYSESSION -> new StudySessionController().run();
+      default -> throw new IllegalArgumentException("Invalid mode.");
+    }
   }
 
   /**
@@ -47,6 +56,9 @@ public class Driver {
   private static void validateArgs(String[] args) {
 
     if (args.length == 3) {
+
+      // sets the mode
+      Driver.mode = Mode.STUDYGUIDE;
 
       // sets the root path, validity will be checked at runtime
       Driver.rootPath = Path.of(args[0]);
@@ -61,9 +73,14 @@ public class Driver {
       // sets the output path, validity will be checked at runtime
       Driver.outputPath = Path.of(args[2]);
 
+    } else if (args.length == 0) {
+
+      // sets the mode
+      Driver.mode = Mode.STUDYSESSION;
+
     } else {
       throw new IllegalArgumentException("Please provide valid root path, "
-          + "order flag, and output path");
+          + "order flag, and output path for study guide or zero arguments for study session.");
     }
   }
 
