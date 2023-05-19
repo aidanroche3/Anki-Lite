@@ -1,4 +1,4 @@
-package cs3500.pa02;
+package cs3500.pa02.fileformatters;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test;
 /**
  * Class for testing FormatFiles and its associated methods
  */
-class FormatFileTest {
+class StudyGuideTest {
 
   String arraysAndTest = """ 
         # This is a test file
@@ -22,6 +22,7 @@ class FormatFileTest {
         ## Declaring an Array
         - [[General Form: type[] arrayName;]]
         - ex: int[] myData;
+        - [[T/F An array's size can be changed:::false]]
                 
         - The above only creates a reference to an array object, but no array has
           actually been created yet.
@@ -63,6 +64,7 @@ class FormatFileTest {
         # This is a test file
 
         ## Heading
+        - [[This is a test question:::this is the answer]]
 
         # Vectors
         - [[Vectors act like resizable arrays]].
@@ -149,8 +151,8 @@ class FormatFileTest {
    */
   @Test
   public void testSummarizeContent() {
-    FormatFile arrays = new FormatFile(arraysAndTest);
-    FormatFile all = new FormatFile(allCombined);
+    StudyGuide arrays = new StudyGuide(arraysAndTest);
+    StudyGuide all = new StudyGuide(allCombined);
     assertEquals(arraysAndTestSummarized, arrays.summarizeContent());
     assertEquals(allCombinedSummarized, all.summarizeContent());
   }
