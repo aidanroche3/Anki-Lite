@@ -1,5 +1,6 @@
-package cs3500.pa02;
+package cs3500.pa02.comparators;
 
+import cs3500.pa02.fileutilities.MarkDownFile;
 import java.util.Comparator;
 
 /**

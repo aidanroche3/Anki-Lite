@@ -1,4 +1,4 @@
-package cs3500.pa02;
+package cs3500.pa02.fileutilities;
 
 import java.io.File;
 import java.io.FileInputStream;

@@ -1,4 +1,4 @@
-package cs3500.pa02;
+package cs3500.pa02.fileutilities;
 
 import java.io.FileWriter;
 import java.io.IOException;
@@ -10,10 +10,10 @@ import java.nio.file.Path;
 public class WriteFilesToPath {
 
   /**
-   * Writes a given output to a specified path
+   * Writes a given output at the given path
    *
    * @param outputPath the path to write to
-   * @param output the content to write at the path
+   * @param output the output to write at that path
    * @throws IOException on I/O failure
    */
   public void writeAtPath(Path outputPath, String output) throws IOException {

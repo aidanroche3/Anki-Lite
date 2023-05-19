@@ -1,4 +1,4 @@
-package cs3500.pa02;
+package cs3500.pa02.fileutilities;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;

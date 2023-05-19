@@ -1,5 +1,8 @@
-package cs3500.pa02;
+package cs3500.pa02.fileutilities;
 
+import cs3500.pa02.comparators.CompareByDate;
+import cs3500.pa02.comparators.CompareByModified;
+import cs3500.pa02.comparators.CompareByName;
 import java.util.ArrayList;
 
 /**

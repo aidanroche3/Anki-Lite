@@ -1,7 +1,8 @@
-package cs3500.pa02;
+package cs3500.pa02.comparators;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import cs3500.pa02.fileutilities.MarkDownFile;
 import java.io.File;
 import java.nio.file.Path;
 import java.nio.file.attribute.FileTime;

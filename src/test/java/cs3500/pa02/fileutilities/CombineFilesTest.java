@@ -1,4 +1,4 @@
-package cs3500.pa02;
+package cs3500.pa02.fileutilities;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -43,15 +43,18 @@ class CombineFilesTest {
         # This is a test file
                 
         ## Heading
+        - [[This is a test question:::answer]]
                 
         # Java Arrays
         - [[An **array** is a collection of variables of the same type]], referred to
           by a common name.
         - In Java, arrays are objects, and must be created dynamically (at runtime).
+        - [[Where are arrays stored in memory?:::the heap]]
                 
         ## Declaring an Array
         - [[General Form: type[] arrayName;]]
         - ex: int[] myData;
+        - [[T/F Arrays can hold multiple data types:::false]]
                 
         - The above only creates a reference to an array object, but no array has
           actually been created yet.
@@ -72,10 +75,12 @@ class CombineFilesTest {
         - [[An **array** is a collection of variables of the same type]], referred to
           by a common name.
         - In Java, arrays are objects, and must be created dynamically (at runtime).
+        - [[Where are arrays stored in memory?:::the heap]]
 
         ## Declaring an Array
         - [[General Form: type[] arrayName;]]
         - ex: int[] myData;
+        - [[T/F Arrays can hold multiple data types:::false]]
 
         - The above only creates a reference to an array object, but no array has
           actually been created yet.
@@ -93,9 +98,11 @@ class CombineFilesTest {
         # This is a test file
 
         ## Heading
+        - [[This is a test question:::answer]]
 
         # Vectors
         - [[Vectors act like resizable arrays]].
+        - [[Which method can resize a vector?:::setSize(int size)]]
 
         ## Declaring a vector
         - [[General Form: Vector<type> v = new Vector();]]
