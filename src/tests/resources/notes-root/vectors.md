@@ -1,5 +1,6 @@
 # Vectors
 - [[Vectors act like resizable arrays]].
+- [[Which method can resize a vector?:::setSize(int size)]]
 
 ## Declaring a vector
 - [[General Form: Vector<type> v = new Vector();]]

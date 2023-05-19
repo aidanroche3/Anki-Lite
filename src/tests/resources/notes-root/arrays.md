@@ -2,10 +2,12 @@
 - [[An **array** is a collection of variables of the same type]], referred to
   by a common name.
 - In Java, arrays are objects, and must be created dynamically (at runtime).
+- [[Where are arrays stored in memory?:::the heap]]
 
 ## Declaring an Array
 - [[General Form: type[] arrayName;]]
 - ex: int[] myData;
+- [[T/F Arrays can hold multiple data types:::false]]
 
 - The above only creates a reference to an array object, but no array has
   actually been created yet.
