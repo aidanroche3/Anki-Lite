@@ -27,6 +27,7 @@ class DriverTest {
       assertEquals(-1, Files.mismatch(
           Path.of("src/tests/resources/outputDirectory/summary.md"),
           Path.of("src/tests/resources/outputDirectory/main.md")));
+      //
     } catch (IOException e) {
       throw new IllegalArgumentException(e);
     }

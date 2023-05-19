@@ -1,5 +1,12 @@
 package cs3500.pa02;
 
+import cs3500.pa02.fileformatters.QuestionAndAnswer;
+import cs3500.pa02.fileformatters.StudyGuide;
+import cs3500.pa02.fileutilities.CombineFiles;
+import cs3500.pa02.fileutilities.FileListSorter;
+import cs3500.pa02.fileutilities.FileTypeVisitor;
+import cs3500.pa02.fileutilities.MarkDownFile;
+import cs3500.pa02.fileutilities.WriteFilesToPath;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -92,16 +99,24 @@ public class Driver {
     CombineFiles filerCombiner = new CombineFiles(sortedFiles);
     // initializing a String of the content of the sorted list of files
     String combinedFiles = filerCombiner.getCombinedFiles();
-    // initializing a new file formatter with the String of combined content
-    FormatFile fileFormatter = new FormatFile(combinedFiles);
-    // initializing a String of the summarized content from the file formatter
-    String formattedFiles = fileFormatter.summarizeContent();
+    // initializing a new study guide with the String of combined content
+    StudyGuide studyGuide = new StudyGuide(combinedFiles);
+    // initializing a String of the summarized content from the combined content
+    String formattedFiles = studyGuide.summarizeContent();
+    // initializing a new question and answer with the String of combined content
+    QuestionAndAnswer questions = new QuestionAndAnswer(combinedFiles);
+    // initializing a String of the extracted questions from the combined content
+    String questionsAndAnswer = questions.extractQuestions();
     // initializing a new write files to path
     WriteFilesToPath fileWriter = new WriteFilesToPath();
     // writing the summarized content at the output path
-    if (outputPath.toString().endsWith(".md")) {
+    String mdOutput = outputPath.toString();
+    if (mdOutput.endsWith(".md")) {
+      String srOutput = mdOutput.substring(0, mdOutput.length() - 3) + ".sr";
+      Path srPath = Path.of(srOutput);
       try {
         fileWriter.writeAtPath(outputPath, formattedFiles);
+        fileWriter.writeAtPath(srPath, questionsAndAnswer);
       } catch (IOException e) {
         throw new RuntimeException(e);
       }
