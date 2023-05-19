@@ -5,6 +5,9 @@ package cs3500.pa02.fileformatters;
  */
 public abstract class FileFormat {
 
+  /**
+   * The content to format
+   */
   protected final String content;
 
   /**
@@ -19,6 +22,7 @@ public abstract class FileFormat {
   /**
    * Returns the previous character in the content string, ' ' if previous is out of bounds
    *
+   * @param content the content
    * @param i the current index of content
    * @return the character before index i
    */
@@ -32,6 +36,7 @@ public abstract class FileFormat {
   /**
    * Returns the next character in the content string, ' ' if next is out of bounds
    *
+   * @param content the content
    * @param i the current index of content
    * @return the next character after index i
    */

@@ -20,6 +20,8 @@ public class FormatQuestions {
 
   /**
    * Formats a list of questions for a .sr file
+   *
+   * @return a String formatted for a .sr file
    */
   public String formatAsSr() {
     StringBuilder content = new StringBuilder();

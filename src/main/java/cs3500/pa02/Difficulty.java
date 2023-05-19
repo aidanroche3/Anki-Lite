@@ -4,7 +4,13 @@ package cs3500.pa02;
  * Represents the difficulty of a question
  */
 public enum Difficulty {
+  /**
+   * Easy question difficulty
+   */
   EASY,
+  /**
+   * Hard question difficulty
+   */
   HARD;
 
   /**

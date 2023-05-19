@@ -26,6 +26,8 @@ public class Question {
 
   /**
    * Gets the question of a question
+   *
+   * @return the question
    */
   public String getQuestion() {
     return this.question;
@@ -33,6 +35,8 @@ public class Question {
 
   /**
    * Gets the answer of a question
+   *
+   * @return the answer
    */
   public String getAnswer() {
     return this.answer;

@@ -16,6 +16,8 @@ public class QuestionAndAnswer extends FileFormat {
 
   /**
    * Returns the questions and answers from the file's content and formats them for a .sr file
+   *
+   * @return a String of the questions formatted for a .sr file
    */
   public String extractQuestions() {
     StringBuilder extractedQuestions = new StringBuilder();
