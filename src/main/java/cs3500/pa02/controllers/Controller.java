@@ -10,9 +10,4 @@ public interface Controller {
    */
   void run();
 
-  /**
-   * Ends the controllers
-   */
-  void end();
-
 }
