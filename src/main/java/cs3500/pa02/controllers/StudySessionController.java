@@ -8,7 +8,6 @@ public class StudySessionController implements Controller {
   /**
    * Initiates the controller
    */
-  @Override
   public void run() {
 
   }
@@ -16,8 +15,7 @@ public class StudySessionController implements Controller {
   /**
    * Ends the controller
    */
-  @Override
-  public void end() {
+  void end() {
 
   }
 
