@@ -95,7 +95,7 @@ class StudySessionViewTest {
    */
   @Test
   public void testGenerating() {
-    studySessionView.generating();
+    studySessionView.generated();
     String generating = """
         Hold tight! Generating and randomizing questions...
         """.replaceAll("\\n|\\r\\n", System.getProperty("line.separator"));
@@ -125,6 +125,18 @@ class StudySessionViewTest {
   }
 
   /**
+   * Tests the separator method
+   */
+  @Test
+  public void testSeparator() {
+    studySessionView.separator();
+    String separator = """
+        ----------------------------------------------------------
+        """.replaceAll("\\n|\\r\\n", System.getProperty("line.separator"));
+    assertEquals(separator, output.toString());
+  }
+
+  /**
    * Tests the answer method
    */
   @Test
@@ -143,7 +155,6 @@ class StudySessionViewTest {
   public void testStats() {
     studySessionView.stats(9, 3, 4, 6, 8);
     String stats = """
-        
         Great work! Here are your stats for this session:\s
         You answered 9 questions.
         3 questions went from easy to hard.

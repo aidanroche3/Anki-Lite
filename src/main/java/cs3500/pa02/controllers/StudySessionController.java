@@ -30,8 +30,10 @@ public class StudySessionController implements Controller {
    * Initiates the controller
    */
   public void run() {
+    studySessionView.welcome();
     acceptPath();
-    generateQuestions(this.inputPath);
+    studySessionView.generated();
+    generateQuestions(inputPath);
     acceptNumQuestions();
     studySessionView.begin();
     studySessionModel = new StudySessionModel(questions, numQuestions);
@@ -43,7 +45,6 @@ public class StudySessionController implements Controller {
    * Accepts a valid input path from the user
    */
   private void acceptPath() {
-    studySessionView.welcome();
     String input = inputReader.read();
     this.inputPath = Path.of(input);
     while (!this.inputPath.toFile().exists() || !this.inputPath.toString().endsWith(".sr")) {
@@ -81,7 +82,6 @@ public class StudySessionController implements Controller {
    * @param inputPath the given input path for the .sr file
    */
   private void generateQuestions(Path inputPath) {
-    studySessionView.generating();
     ReadAsQuestions readAsQuestions = new ReadAsQuestions(inputPath.toFile());
     ArrayList<Question> questions = readAsQuestions.generateListOfQuestions();
     RandomizeQuestions randomizeQuestions = new RandomizeQuestions(questions);
@@ -97,6 +97,7 @@ public class StudySessionController implements Controller {
       try {
         Question next = studySessionModel.nextQuestion();
         int currentQuestion = studySessionModel.getCurrent();
+        studySessionView.separator();
         studySessionView.displayQuestion(next, currentQuestion);
         String input = inputReader.read();
         handleInput(input, next);
@@ -145,6 +146,7 @@ public class StudySessionController implements Controller {
     } catch (IOException e) {
       throw new RuntimeException(e);
     }
+    studySessionView.separator();
     studySessionView.stats(studySessionModel.getCurrent(), studySessionModel.getEasyToHard(),
         studySessionModel.getHardToEasy(), formatQuestions.getNumHard(),
         formatQuestions.getNumEasy());

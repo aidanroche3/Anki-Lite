@@ -50,7 +50,7 @@ public class StudySessionView {
   /**
    * Prompt for generating and randomizing the questions
    */
-  public void generating() {
+  public void generated() {
     System.out.println("Hold tight! Generating and randomizing questions...");
   }
 
@@ -69,6 +69,13 @@ public class StudySessionView {
    */
   public void displayQuestion(Question question, int currentQuestion) {
     System.out.print(currentQuestion + ". " + question.getQuestion() + " ");
+  }
+
+  /**
+   * Displays a separator
+   */
+  public void separator() {
+    System.out.println("----------------------------------------------------------");
   }
 
   /**
@@ -91,7 +98,6 @@ public class StudySessionView {
    */
   public void stats(int questionsAnswered, int easyToHard, int hardToEasy,
                     int totalHard, int totalEasy) {
-    System.out.println();
     System.out.println("Great work! Here are your stats for this session: ");
     System.out.println("You answered " + questionsAnswered + " questions.");
     System.out.println(easyToHard + " questions went from easy to hard.");
