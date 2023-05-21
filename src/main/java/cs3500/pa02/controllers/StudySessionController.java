@@ -10,6 +10,7 @@ import cs3500.pa02.questionutilities.ReadAsQuestions;
 import cs3500.pa02.readers.InputReader;
 import cs3500.pa02.views.StudySessionView;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.nio.file.Path;
 import java.util.ArrayList;
 
@@ -52,11 +53,11 @@ public class StudySessionController implements Controller {
     if (this.state.equals(State.InitialInputPhase)) {
       studySessionView.welcome();
       InputReader inputReader = new InputReader();
-      String input = inputReader.read();
+      String input = inputReader.read(new InputStreamReader(System.in));
       this.inputPath = Path.of(input);
       while (!this.inputPath.toFile().exists() || !this.inputPath.toString().endsWith(".sr")) {
         studySessionView.invalidPath();
-        input = inputReader.read();
+        input = inputReader.read(new InputStreamReader(System.in));
         this.inputPath = Path.of(input);
       }
     }
@@ -68,19 +69,19 @@ public class StudySessionController implements Controller {
   private void acceptNumQuestions() {
     if (this.state.equals(State.InitialInputPhase)) {
       studySessionView.initialPrompt();
-      String input = inputReader.read();
+      String input = inputReader.read(new InputStreamReader(System.in));
       while (true) {
         try {
           this.numQuestions = Integer.parseInt(input);
           if (this.numQuestions < 1) {
             studySessionView.invalidNumberPrompt(questions.size());
-            input = inputReader.read();
+            input = inputReader.read(new InputStreamReader(System.in));
           } else {
             break;
           }
         } catch (NumberFormatException e) {
           studySessionView.invalidNumberPrompt(questions.size());
-          input = inputReader.read();
+          input = inputReader.read(new InputStreamReader(System.in));
         }
       }
     } else {
@@ -115,7 +116,7 @@ public class StudySessionController implements Controller {
         Question next = studySessionModel.nextQuestion();
         int currentQuestion = studySessionModel.getCurrent();
         studySessionView.displayQuestion(next, currentQuestion);
-        String input = inputReader.read();
+        String input = inputReader.read(new InputStreamReader(System.in));
         handleInput(input, next);
       } catch (IllegalArgumentException e) {
         end();
@@ -134,7 +135,7 @@ public class StudySessionController implements Controller {
       case "t" -> end();
       default -> {
         studySessionView.options();
-        handleInput(inputReader.read(), current);
+        handleInput(inputReader.read(new InputStreamReader(System.in)), current);
       }
     }
   }
