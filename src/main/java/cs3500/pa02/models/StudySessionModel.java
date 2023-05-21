@@ -30,7 +30,7 @@ public class StudySessionModel {
    * @return the next question in the list
    */
   public Question nextQuestion() {
-    if (currentQuestion < numQuestions) {
+    if (currentQuestion < numQuestions && currentQuestion < questions.size()) {
       int current = currentQuestion;
       this.currentQuestion++;
       return questions.get(current);
