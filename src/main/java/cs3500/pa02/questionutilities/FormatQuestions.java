@@ -41,7 +41,9 @@ public class FormatQuestions {
   }
 
   /**
-   * Gets the number of easy questions in the new question bank
+   * Gets the number of hard questions in the new question bank
+   *
+   * @return the number of hard questions
    */
   public int getNumHard() {
     return this.numHard;
@@ -49,6 +51,8 @@ public class FormatQuestions {
 
   /**
    * Gets the number of easy questions in the new question bank
+   *
+   * @return the number of easy questions
    */
   public int getNumEasy() {
     return this.numEasy;

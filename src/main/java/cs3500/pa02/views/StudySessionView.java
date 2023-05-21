@@ -39,6 +39,8 @@ public class StudySessionView {
 
   /**
    *  Re-prompts the user if the input is not a valid number
+   *
+   * @param numQuestions the number of available questions
    */
   public void invalidNumberPrompt(int numQuestions) {
     System.out.print("There are " + numQuestions + " questions to study. "
@@ -61,6 +63,9 @@ public class StudySessionView {
 
   /**
    * Displays the current question to the user
+   *
+   * @param question the question
+   * @param currentQuestion the number of the current question
    */
   public void displayQuestion(Question question, int currentQuestion) {
     System.out.print(currentQuestion + ". " + question.getQuestion() + " ");
@@ -77,6 +82,12 @@ public class StudySessionView {
 
   /**
    * Displays the user stats
+   *
+   * @param questionsAnswered the number of questions answered
+   * @param easyToHard the number of questions that went from easy to hard
+   * @param hardToEasy the number of questions that went from hard to easy
+   * @param totalHard the number of hard questions in the bank
+   * @param totalEasy the number of easy questions in the bank
    */
   public void stats(int questionsAnswered, int easyToHard, int hardToEasy,
                     int totalHard, int totalEasy) {

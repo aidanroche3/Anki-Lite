@@ -17,6 +17,9 @@ public class StudySessionModel {
 
   /**
    * Instantiates a study session
+   *
+   * @param questions the list of questions to study
+   * @param numQuestions the number of questions to study
    */
   public StudySessionModel(ArrayList<Question> questions, int numQuestions) {
     this.questions = questions;
@@ -69,6 +72,7 @@ public class StudySessionModel {
   /**
    * Sets the difficulty of the question and updates the stats
    *
+   * @param current the current question
    * @param difficulty the difficulty to set the question
    */
   public void setDifficulty(Question current, Difficulty difficulty) {
