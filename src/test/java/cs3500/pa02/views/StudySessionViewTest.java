@@ -141,10 +141,13 @@ class StudySessionViewTest {
   @Test
   public void testStats() {
     studySessionView.stats(9, 3, 4, 6, 8);
-    String stats = "\r\nGreat work! Here are your stats for this session: "
-    + "\r\nYou answered 9 questions.\r\n3 questions went from easy to hard.\r\n"
-    + "4 questions went from hard to easy.\r\nThere are now 6 hard questions in the question bank.\r\n"
-        + "There are now 8 easy questions in the question bank.\r\n";
+    String stats =
+        "\nGreat work! Here are your stats for this session:\s\n"
+        + "You answered 9 questions.\n"
+        + "3 questions went from easy to hard.\n"
+        + "4 questions went from hard to easy.\n"
+        + "There are now 6 hard questions in the question bank.\n"
+        + "There are now 8 easy questions in the question bank.\n";
     assertEquals(stats, output.toString());
   }
 
