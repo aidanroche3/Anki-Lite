@@ -19,27 +19,25 @@ import java.util.List;
  */
 public class StudyGuideController implements Controller {
 
-  private final Path rootPath;
-  private final String orderFlag;
-  private final Path outputPath;
+  private final String[] args;
+  private Path rootPath;
+  private String orderFlag;
+  private Path outputPath;
 
   /**
    * Initiates a study guide controller
    *
-   * @param rootPath the root path to create a study guide from
-   * @param orderFlag the order flag to sort the guide
-   * @param outputPath the output path to write the guide at
+   * @param args the arguments given by the user
    */
-  public StudyGuideController(Path rootPath, String orderFlag, Path outputPath) {
-    this.rootPath = rootPath;
-    this.orderFlag = orderFlag;
-    this.outputPath = outputPath;
+  public StudyGuideController(String[] args) {
+    this.args = args;
   }
 
   /**
    * Initiates the study guide
    */
   public void run() {
+    validateArgs(args);
     // initializing a list of valid types of files for the visitor to "collect"
     ArrayList<String> validTypes = new ArrayList<>(List.of(".md"));
     // initializing the file visitor
@@ -89,6 +87,26 @@ public class StudyGuideController implements Controller {
     } else {
       throw new IllegalArgumentException("Output path is not a .md file.");
     }
+  }
+
+  /**
+   * Initializes the fields of main, checking that the order flag is valid
+   *
+   * @param args the arguments provided by the user
+   */
+  private void validateArgs(String[] args) {
+    // sets the root path, validity will be checked at runtime
+    this.rootPath = Path.of(args[0]);
+
+    // validates the order flag
+    if (args[1].equals("filename") || args[1].equals("created") || args[1].equals("modified")) {
+      this.orderFlag = args[1];
+    } else {
+      throw new IllegalArgumentException("Invalid order flag.");
+    }
+
+    // sets the output path, validity will be checked at runtime
+    this.outputPath = Path.of(args[2]);
   }
 
 }

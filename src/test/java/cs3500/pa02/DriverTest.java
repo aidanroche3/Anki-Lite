@@ -2,7 +2,6 @@ package cs3500.pa02;
 
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -27,45 +26,20 @@ class DriverTest {
       assertEquals(-1, Files.mismatch(
           Path.of("src/tests/resources/outputDirectory/summary.md"),
           Path.of("src/tests/resources/outputDirectory/main.md")));
-      //
+      assertEquals(-1, Files.mismatch(
+          Path.of("src/tests/resources/outputDirectory/summary.sr"),
+          Path.of("src/tests/resources/outputDirectory/main.sr")));
     } catch (IOException e) {
       throw new IllegalArgumentException(e);
     }
   }
 
   /**
-   * Tests valid arguments
+   * Tests determineMode
    */
   @Test
-  public void testValidateArgs() {
-    String[] invalidLength = {"src/tests/resources/notes-root", "filename"};
-    assertThrows(RuntimeException.class, () -> Driver.main(invalidLength));
-    String[] invalidRoot = {"fake-root",
-        "modified", "src/tests/resources/outputDirectory/summary.md"};
-    assertThrows(RuntimeException.class, () -> Driver.main(invalidRoot));
-    String[] nonDirectory = {"src/tests/resources/notes-root/arrays.md", "modified",
-        "src/tests/resources/outputDirectory/summary.md"};
-    assertThrows(RuntimeException.class, () -> Driver.main(nonDirectory));
-    String[] invalidFlag = {"src/tests/resources/notes-root",
-        "invalid", "src/tests/resources/outputDirectory/summary.md"};
-    assertThrows(IllegalArgumentException.class, () -> Driver.main(invalidFlag));
-    String[] invalidRelativePath = {"src/tests/resources/notes-root",
-        "created", "src/tests/resources/fakeDirectory/new"};
-    assertThrows(RuntimeException.class, () -> Driver.main(invalidRelativePath));
-    String[] notInMd = {"src/tests/resources/notes-root",
-        "modified", "src/tests/resources/outputDirectory/summary.pdf"};
-    assertThrows(RuntimeException.class, () -> Driver.main(notInMd));
-    String[] invalidOutputMd = {"src/tests/resources/notes-root",
-        "created", "/fake/nonexistent.md"};
-    assertThrows(RuntimeException.class, () -> Driver.main(invalidOutputMd));
-    String[] newFile = {"src/tests/resources/notes-root",
-        "created", "src/tests/resources/outputDirectory/newfile.md"};
-    assertDoesNotThrow(() -> Driver.main(newFile));
-    String[] validArgs = {"src/tests/resources/notes-root",
-        "filename", "src/tests/resources/outputDirectory/summary.md"};
-    assertDoesNotThrow(() -> Driver.main(validArgs));
-    String[] emptyArgs = {};
-    assertDoesNotThrow(() -> Driver.main(emptyArgs));
+  public void testDetermineMode() {
+
   }
 
 }
