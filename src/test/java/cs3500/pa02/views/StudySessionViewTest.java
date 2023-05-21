@@ -41,7 +41,8 @@ class StudySessionViewTest {
     String welcome = """
         
         Welcome to Anki-Lite!
-        To begin, input a valid .sr file to study from:\s""";
+        To begin, input a valid .sr file to study from:\s""".replaceAll(
+            "\\n|\\r\\n", System.getProperty("line.separator"));
     assertEquals(welcome, output.toString());
   }
 
@@ -54,7 +55,7 @@ class StudySessionViewTest {
     String begin = """
         Great! Let's begin!
         
-        """;
+        """.replaceAll("\\n|\\r\\n", System.getProperty("line.separator"));
     assertEquals(begin, output.toString());
   }
 
@@ -97,7 +98,7 @@ class StudySessionViewTest {
     studySessionView.generating();
     String generating = """
         Hold tight! Generating and randomizing questions...
-        """;
+        """.replaceAll("\\n|\\r\\n", System.getProperty("line.separator"));
     assertEquals(generating, output.toString());
   }
 
@@ -108,8 +109,8 @@ class StudySessionViewTest {
   public void testOptions() {
     studySessionView.options();
     String options = """
-        Options: H to set hard, E to set easy, A to see answer, T to terminate.\r
-        """;
+        Options: H to set hard, E to set easy, A to see answer, T to terminate.
+        """.replaceAll("\\n|\\r\\n", System.getProperty("line.separator"));
     assertEquals(options, output.toString());
   }
 
@@ -130,8 +131,8 @@ class StudySessionViewTest {
   public void testAnswer() {
     studySessionView.answer(testQuestion);
     String answer = """
-        Answer:Answer\r
-        """;
+        Answer:Answer
+        """.replaceAll("\\n|\\r\\n", System.getProperty("line.separator"));
     assertEquals(answer, output.toString());
   }
 
@@ -141,13 +142,15 @@ class StudySessionViewTest {
   @Test
   public void testStats() {
     studySessionView.stats(9, 3, 4, 6, 8);
-    String stats =
-        "\nGreat work! Here are your stats for this session:\s\n"
-        + "You answered 9 questions.\n"
-        + "3 questions went from easy to hard.\n"
-        + "4 questions went from hard to easy.\n"
-        + "There are now 6 hard questions in the question bank.\n"
-        + "There are now 8 easy questions in the question bank.\n";
+    String stats = """
+        
+        Great work! Here are your stats for this session:\s
+        You answered 9 questions.
+        3 questions went from easy to hard.
+        4 questions went from hard to easy.
+        There are now 6 hard questions in the question bank.
+        There are now 8 easy questions in the question bank.
+        """.replaceAll("\\n|\\r\\n", System.getProperty("line.separator"));
     assertEquals(stats, output.toString());
   }
 
@@ -158,8 +161,9 @@ class StudySessionViewTest {
   public void testGoodbye() {
     studySessionView.goodbye();
     String goodbye = """
-        Thanks for studying! Have a great day!\r
-        """;
+        Thanks for studying! Have a great day!
+        """.replaceAll(
+        "\\n|\\r\\n", System.getProperty("line.separator"));
     assertEquals(goodbye, output.toString());
   }
 
