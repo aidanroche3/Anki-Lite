@@ -31,16 +31,15 @@ class FormatQuestionsTest {
     arraysTwo = new Question("T/F Arrays can hold multiple data types",
         "false", Difficulty.HARD);
     test = new Question("This is a test question",
-        "answer", Difficulty.HARD);
+        "answer", Difficulty.EASY);
     vector = new Question("Which method can resize a vector?",
         "setSize(int size)", Difficulty.HARD);
     sampleQuestions = new ArrayList<>(Arrays.asList(arraysOne, arraysTwo, test, vector));
     content = """
         [Q]Where are arrays stored in memory?[A]the heap[D]HARD
         [Q]T/F Arrays can hold multiple data types[A]false[D]HARD
-        [Q]This is a test question[A]answer[D]HARD
+        [Q]This is a test question[A]answer[D]EASY
         [Q]Which method can resize a vector?[A]setSize(int size)[D]HARD
-        
         """;
     formatQuestions = new FormatQuestions(sampleQuestions);
   }
@@ -51,6 +50,24 @@ class FormatQuestionsTest {
   @Test
   public void testFormatAsSr() {
     assertEquals(content, formatQuestions.formatAsSr());
+  }
+
+  /**
+   * Tests the getNumHard method
+   */
+  @Test
+  public void testGetNumHard() {
+    formatQuestions.formatAsSr();
+    assertEquals(3, formatQuestions.getNumHard());
+  }
+
+  /**
+   * Tests the getNumEasy method
+   */
+  @Test
+  public void testGetNumEasy() {
+    formatQuestions.formatAsSr();
+    assertEquals(1, formatQuestions.getNumEasy());
   }
 
 }

@@ -1,5 +1,6 @@
 package cs3500.pa02.questionutilities;
 
+import cs3500.pa02.Difficulty;
 import java.util.ArrayList;
 
 /**
@@ -8,6 +9,8 @@ import java.util.ArrayList;
 public class FormatQuestions {
 
   private final ArrayList<Question> questions;
+  private int numHard;
+  private int numEasy;
 
   /**
    * Initializes a FormatQuestions
@@ -26,11 +29,29 @@ public class FormatQuestions {
   public String formatAsSr() {
     StringBuilder content = new StringBuilder();
     for (Question question : this.questions) {
-      content.append(question.toString());
+      if (question.getDifficulty().equals(Difficulty.HARD)) {
+        numHard++;
+      } else {
+        numEasy++;
+      }
+      content.append(question);
       content.append("\n");
     }
-    content.append("\n");
     return content.toString();
+  }
+
+  /**
+   * Gets the number of easy questions in the new question bank
+   */
+  public int getNumHard() {
+    return this.numHard;
+  }
+
+  /**
+   * Gets the number of easy questions in the new question bank
+   */
+  public int getNumEasy() {
+    return this.numEasy;
   }
 
 }
