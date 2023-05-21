@@ -26,7 +26,7 @@ public class InputReader implements Reader {
    */
   @Override
   public String read() {
-    return consoleScanner.next();
+    return consoleScanner.nextLine();
   }
 
 }
