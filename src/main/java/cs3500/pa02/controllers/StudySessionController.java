@@ -10,7 +10,6 @@ import cs3500.pa02.questionutilities.ReadAsQuestions;
 import cs3500.pa02.readers.InputReader;
 import cs3500.pa02.views.StudySessionView;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.nio.file.Path;
 import java.util.ArrayList;
 
@@ -19,9 +18,9 @@ import java.util.ArrayList;
  */
 public class StudySessionController implements Controller {
 
-  private State state = State.InitialInputPhase;
   private final StudySessionView studySessionView = new StudySessionView();
-  private final InputReader inputReader = new InputReader();
+  private final InputReader inputReader = new InputReader(System.in);
+  private State state = State.InitialInputPhase;
   private StudySessionModel studySessionModel;
   private Path inputPath;
   private ArrayList<Question> questions;
@@ -31,35 +30,26 @@ public class StudySessionController implements Controller {
    * Initiates the controller
    */
   public void run() {
-    if (this.state.equals(State.InitialInputPhase)) {
-      acceptPath();
-      setState(State.GenerateQuestion);
-      generateQuestions(this.inputPath);
-      setState(State.InitialInputPhase);
-      acceptNumQuestions();
-      studySessionView.begin();
-      studySessionModel = new StudySessionModel(questions, numQuestions);
-      setState(State.StudySession);
-      studySession();
-    } else {
-      throw new IllegalStateException("Invalid state, cannot run controller.");
-    }
+    acceptPath();
+    generateQuestions(this.inputPath);
+    acceptNumQuestions();
+    studySessionView.begin();
+    studySessionModel = new StudySessionModel(questions, numQuestions);
+    setState(State.StudySession);
+    studySession();
   }
 
   /**
    * Accepts a valid input path from the user
    */
   private void acceptPath() {
-    if (this.state.equals(State.InitialInputPhase)) {
-      studySessionView.welcome();
-      InputReader inputReader = new InputReader();
-      String input = inputReader.read(new InputStreamReader(System.in));
+    studySessionView.welcome();
+    String input = inputReader.read();
+    this.inputPath = Path.of(input);
+    while (!this.inputPath.toFile().exists() || !this.inputPath.toString().endsWith(".sr")) {
+      studySessionView.invalidPath();
+      input = inputReader.read();
       this.inputPath = Path.of(input);
-      while (!this.inputPath.toFile().exists() || !this.inputPath.toString().endsWith(".sr")) {
-        studySessionView.invalidPath();
-        input = inputReader.read(new InputStreamReader(System.in));
-        this.inputPath = Path.of(input);
-      }
     }
   }
 
@@ -67,25 +57,21 @@ public class StudySessionController implements Controller {
    * Accepts a valid number of questions from the user
    */
   private void acceptNumQuestions() {
-    if (this.state.equals(State.InitialInputPhase)) {
-      studySessionView.initialPrompt();
-      String input = inputReader.read(new InputStreamReader(System.in));
-      while (true) {
-        try {
-          this.numQuestions = Integer.parseInt(input);
-          if (this.numQuestions < 1) {
-            studySessionView.invalidNumberPrompt(questions.size());
-            input = inputReader.read(new InputStreamReader(System.in));
-          } else {
-            break;
-          }
-        } catch (NumberFormatException e) {
+    studySessionView.initialPrompt();
+    String input = inputReader.read();
+    while (true) {
+      try {
+        this.numQuestions = Integer.parseInt(input);
+        if (this.numQuestions < 1) {
           studySessionView.invalidNumberPrompt(questions.size());
-          input = inputReader.read(new InputStreamReader(System.in));
+          input = inputReader.read();
+        } else {
+          break;
         }
+      } catch (NumberFormatException e) {
+        studySessionView.invalidNumberPrompt(questions.size());
+        input = inputReader.read();
       }
-    } else {
-      throw new IllegalStateException("Cannot accept number of questions.");
     }
   }
 
@@ -95,15 +81,11 @@ public class StudySessionController implements Controller {
    * @param inputPath the given input path for the .sr file
    */
   private void generateQuestions(Path inputPath) {
-    if (this.state.equals(State.GenerateQuestion)) {
-      studySessionView.generating();
-      ReadAsQuestions readAsQuestions = new ReadAsQuestions(inputPath.toFile());
-      ArrayList<Question> questions = readAsQuestions.generateListOfQuestions();
-      RandomizeQuestions randomizeQuestions = new RandomizeQuestions(questions);
-      this.questions = randomizeQuestions.getRandomizedQuestions();
-    } else {
-      throw new IllegalStateException("Cannot generate questions.");
-    }
+    studySessionView.generating();
+    ReadAsQuestions readAsQuestions = new ReadAsQuestions(inputPath.toFile());
+    ArrayList<Question> questions = readAsQuestions.generateListOfQuestions();
+    RandomizeQuestions randomizeQuestions = new RandomizeQuestions(questions);
+    this.questions = randomizeQuestions.getRandomizedQuestions();
   }
 
   /**
@@ -116,7 +98,7 @@ public class StudySessionController implements Controller {
         Question next = studySessionModel.nextQuestion();
         int currentQuestion = studySessionModel.getCurrent();
         studySessionView.displayQuestion(next, currentQuestion);
-        String input = inputReader.read(new InputStreamReader(System.in));
+        String input = inputReader.read();
         handleInput(input, next);
       } catch (IllegalArgumentException e) {
         end();
@@ -135,7 +117,7 @@ public class StudySessionController implements Controller {
       case "t" -> end();
       default -> {
         studySessionView.options();
-        handleInput(inputReader.read(new InputStreamReader(System.in)), current);
+        handleInput(inputReader.read(), current);
       }
     }
   }
@@ -151,23 +133,19 @@ public class StudySessionController implements Controller {
    * Ends the controller
    */
   private void end() {
-    if (this.state.equals(State.StudySession)) {
-      this.state = State.Stats;
-      FormatQuestions formatQuestions = new FormatQuestions(questions);
-      String srFormat = formatQuestions.formatAsSr();
-      WriteFilesToPath writeFilesToPath = new WriteFilesToPath();
-      try {
-        writeFilesToPath.writeAtPath(inputPath, srFormat);
-      } catch (IOException e) {
-        throw new RuntimeException(e);
-      }
-      studySessionView.stats(studySessionModel.getCurrent(), studySessionModel.getEasyToHard(),
-          studySessionModel.getHardToEasy(), formatQuestions.getNumHard(),
-          formatQuestions.getNumEasy());
-      studySessionView.goodbye();
-    } else {
-      throw new IllegalArgumentException("Cannot end session yet.");
+    setState(State.Stats);
+    FormatQuestions formatQuestions = new FormatQuestions(questions);
+    String srFormat = formatQuestions.formatAsSr();
+    WriteFilesToPath writeFilesToPath = new WriteFilesToPath();
+    try {
+      writeFilesToPath.writeAtPath(inputPath, srFormat);
+    } catch (IOException e) {
+      throw new RuntimeException(e);
     }
+    studySessionView.stats(studySessionModel.getCurrent(), studySessionModel.getEasyToHard(),
+        studySessionModel.getHardToEasy(), formatQuestions.getNumHard(),
+        formatQuestions.getNumEasy());
+    studySessionView.goodbye();
   }
 
 }

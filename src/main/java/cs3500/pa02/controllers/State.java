@@ -9,15 +9,6 @@ public enum State {
    */
   InitialInputPhase,
 
-  /**
-   * User input phase of the controller
-   */
-  UserInputPhase,
-
-  /**
-   * Generating questions phase
-   */
-  GenerateQuestion,
 
   /**
    * StudySession phase
@@ -25,7 +16,7 @@ public enum State {
   StudySession,
 
   /**
-   * Stats phase
+   * States phase
    */
   Stats
 

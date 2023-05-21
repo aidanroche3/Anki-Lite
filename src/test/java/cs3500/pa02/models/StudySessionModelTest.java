@@ -48,6 +48,13 @@ class StudySessionModelTest {
     assertEquals(hydrogen, model.nextQuestion());
     assertEquals(sameQuestion, model.nextQuestion());
     assertThrows(IllegalArgumentException.class, model::nextQuestion);
+    model = new StudySessionModel(questions, 7);
+    model.nextQuestion();
+    model.nextQuestion();
+    model.nextQuestion();
+    model.nextQuestion();
+    model.nextQuestion();
+    assertThrows(IllegalArgumentException.class, () -> model.nextQuestion());
   }
 
   /**
