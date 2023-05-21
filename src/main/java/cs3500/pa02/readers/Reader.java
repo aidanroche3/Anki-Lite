@@ -8,5 +8,5 @@ public interface Reader {
   /**
    * Reads an input
    */
-  String read();
+  String read(Readable readable);
 }
