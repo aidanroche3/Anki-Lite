@@ -1,17 +1,17 @@
+[Q]Which method can resize a vector?[A]setSize(int size)[D]HARD
+[Q]This is a test question[A]answer[D]HARD
+[Q]Which country is famous for its fjords? [A] Norway.[D]HARD
+[Q]What is the largest lake in North America? [A] The largest lake is Lake Superior.[D]HARD
+[Q]Which country is known as the Land of the Midnight Sun?[A]Norway.[D]HARD
+[Q]Which country is the driest inhabited continent on Earth?[A]Australia.[D]HARD
+[Q]Which country is known as the Land of a Thousand Lakes? [A] Finland.[D]HARD
+[Q]Which country is famous for its tulips and windmills?[A]The Netherlands.[D]HARD
+[Q]What is the largest island in the world?[A]The largest island is Greenland.[D]HARD
+[Q]Which country is the smallest in terms of land area?[A]The smallest country is Vatican City.[D]HARD
+[Q]Which country is the largest in terms of land area?[A]The largest country is Russia.[D]HARD
+[Q]Which continent is the driest inhabited continent on Earth?[A]Australia.[D]HARD
 [Q]Where are arrays stored in memory?[A]the heap[D]HARD
 [Q]What is the largest river in Africa?[A]The largest river is the Nile River.[D]EASY
-[Q]Which continent is the driest inhabited continent on Earth?[A]Australia.[D]HARD
-[Q]Which country is the largest in terms of land area?[A]The largest country is Russia.[D]HARD
-[Q]Which country is the smallest in terms of land area?[A]The smallest country is Vatican City.[D]HARD
-[Q]What is the largest island in the world?[A]The largest island is Greenland.[D]HARD
-[Q]Which country is famous for its tulips and windmills?[A]The Netherlands.[D]HARD
-[Q]Which country is known as the Land of a Thousand Lakes? [A] Finland.[D]HARD
-[Q]Which country is the driest inhabited continent on Earth?[A]Australia.[D]HARD
-[Q]Which country is known as the Land of the Midnight Sun?[A]Norway.[D]HARD
-[Q]What is the largest lake in North America? [A] The largest lake is Lake Superior.[D]HARD
-[Q]Which country is famous for its fjords? [A] Norway.[D]HARD
-[Q]This is a test question[A]answer[D]HARD
-[Q]Which method can resize a vector?[A]setSize(int size)[D]HARD
 [Q]What is the capital of Mexico? [A] The capital is Mexico City.[D]EASY
 [Q]What is the capital of Canada?[A]The capital is Ottawa.[D]EASY
 [Q]What is the largest coral reef system in the world?[A]The largest coral reef system is the Great Barrier Reef in Australia.[D]EASY

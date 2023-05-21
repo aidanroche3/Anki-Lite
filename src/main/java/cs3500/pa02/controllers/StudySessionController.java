@@ -132,6 +132,10 @@ public class StudySessionController implements Controller {
       case "e" -> studySessionModel.setDifficulty(current, Difficulty.EASY);
       case "a" -> studySessionView.answer(current);
       case "t" -> end();
+      default -> {
+        studySessionView.options();
+        handleInput(inputReader.read(), current);
+      }
     }
   }
 
