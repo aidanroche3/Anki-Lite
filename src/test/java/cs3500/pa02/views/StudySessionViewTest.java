@@ -16,8 +16,8 @@ import org.junit.jupiter.api.Test;
 class StudySessionViewTest {
 
   private final ByteArrayOutputStream output = new ByteArrayOutputStream();
-  private final PrintStream sysOut = System.out;
-  private final StudySessionView studySessionView = new StudySessionView();
+  private PrintStream sysOut;
+  private StudySessionView studySessionView;
   Question testQuestion;
 
   /**
@@ -26,8 +26,11 @@ class StudySessionViewTest {
   @BeforeEach
   public void setup() {
     System.setOut(new PrintStream(output));
+    sysOut = System.out;
+    studySessionView = new StudySessionView();
     testQuestion = new Question("Test question?", "Answer", Difficulty.HARD);
   }
+
 
   /**
    * Tests the welcome method
@@ -36,8 +39,8 @@ class StudySessionViewTest {
   public void testWelcome() {
     studySessionView.welcome();
     String welcome = """
-        \r
-        Welcome to Anki-Lite!\r
+        
+        Welcome to Anki-Lite!
         To begin, input a valid .sr file to study from:\s""";
     assertEquals(welcome, output.toString());
   }
@@ -49,8 +52,8 @@ class StudySessionViewTest {
   public void testBegin() {
     studySessionView.begin();
     String begin = """
-        Great! Let's begin!\r
-        \r
+        Great! Let's begin!
+        
         """;
     assertEquals(begin, output.toString());
   }
@@ -93,7 +96,7 @@ class StudySessionViewTest {
   public void testGenerating() {
     studySessionView.generating();
     String generating = """
-        Hold tight! Generating and randomizing questions...\r
+        Hold tight! Generating and randomizing questions...
         """;
     assertEquals(generating, output.toString());
   }
@@ -138,15 +141,10 @@ class StudySessionViewTest {
   @Test
   public void testStats() {
     studySessionView.stats(9, 3, 4, 6, 8);
-    String stats = """
-        \r
-        Great work! Here are your stats for this session: \r
-        You answered 9 questions.\r
-        3 questions went from easy to hard.\r
-        4 questions went from hard to easy.\r
-        There are now 6 hard questions in the question bank.\r
-        There are now 8 easy questions in the question bank.\r
-        """;
+    String stats = "\r\nGreat work! Here are your stats for this session: "
+    + "\r\nYou answered 9 questions.\r\n3 questions went from easy to hard.\r\n"
+    + "4 questions went from hard to easy.\r\nThere are now 6 hard questions in the question bank.\r\n"
+        + "There are now 8 easy questions in the question bank.\r\n";
     assertEquals(stats, output.toString());
   }
 
@@ -169,5 +167,4 @@ class StudySessionViewTest {
   public void restore() {
     System.setOut(sysOut);
   }
-
 }

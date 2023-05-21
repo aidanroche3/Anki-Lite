@@ -1,6 +1,5 @@
 package cs3500.pa02.readers;
 
-import java.io.InputStreamReader;
 import java.util.Scanner;
 
 /**
@@ -12,9 +11,8 @@ public class InputReader implements Reader {
    * Reads a user's input as a String
    */
   @Override
-  public String read() {
-    Readable consoleInput = new InputStreamReader(System.in);
-    Scanner consoleScanner = new Scanner(consoleInput);
+  public String read(Readable readable) {
+    Scanner consoleScanner = new Scanner(readable);
     return consoleScanner.next();
   }
 

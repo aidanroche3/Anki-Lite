@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -31,7 +32,7 @@ class InputReaderTest {
    */
   @Test
   public void testRead() {
-    String read = inputReader.read();
+    String read = inputReader.read(new InputStreamReader(inputStream));
     assertEquals("hello", read);
   }
 

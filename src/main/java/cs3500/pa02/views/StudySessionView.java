@@ -6,7 +6,6 @@ import cs3500.pa02.questionutilities.Question;
  * Class for displaying the view of the study session
  */
 public class StudySessionView {
-
   /**
    * Displays the welcome message
    */
