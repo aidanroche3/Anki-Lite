@@ -34,12 +34,17 @@ public class StudySessionModel {
    */
   public Question nextQuestion() {
     if (currentQuestion < numQuestions && currentQuestion < questions.size()) {
-      int current = currentQuestion;
-      this.currentQuestion++;
-      return questions.get(current);
+      return questions.get(currentQuestion);
     } else {
       throw new IllegalArgumentException("No more questions left.");
     }
+  }
+
+  /**
+   * Increments the current question by one
+   */
+  public void incrementQuestions() {
+    this.currentQuestion = this.currentQuestion + 1;
   }
 
   /**

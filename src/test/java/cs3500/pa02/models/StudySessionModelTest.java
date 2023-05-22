@@ -46,14 +46,16 @@ class StudySessionModelTest {
   public void testNextQuestion() {
     model = new StudySessionModel(questions, 2);
     assertEquals(hydrogen, model.nextQuestion());
+    model.incrementQuestions();
     assertEquals(sameQuestion, model.nextQuestion());
+    model.incrementQuestions();
     assertThrows(IllegalArgumentException.class, model::nextQuestion);
-    model = new StudySessionModel(questions, 7);
-    model.nextQuestion();
-    model.nextQuestion();
-    model.nextQuestion();
-    model.nextQuestion();
-    model.nextQuestion();
+    model = new StudySessionModel(questions, 5);
+    model.incrementQuestions();
+    model.incrementQuestions();
+    model.incrementQuestions();
+    model.incrementQuestions();
+    model.incrementQuestions();
     assertThrows(IllegalArgumentException.class, () -> model.nextQuestion());
   }
 
@@ -64,9 +66,9 @@ class StudySessionModelTest {
   public void testGetCurrent() {
     model = new StudySessionModel(questions, 3);
     assertEquals(0, model.getCurrent());
-    model.nextQuestion();
+    model.incrementQuestions();
     assertEquals(1, model.getCurrent());
-    model.nextQuestion();
+    model.incrementQuestions();
     assertEquals(2, model.getCurrent());
   }
 

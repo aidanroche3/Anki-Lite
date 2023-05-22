@@ -114,11 +114,21 @@ public class StudySessionController implements Controller {
    * @param current the current question
    */
   private void handleInput(String input, Question current) {
-    switch (input.toLowerCase()) {
-      case "h" -> studySessionModel.setDifficulty(current, Difficulty.HARD);
-      case "e" -> studySessionModel.setDifficulty(current, Difficulty.EASY);
-      case "a" -> studySessionView.answer(current);
-      case "t" -> end();
+    Input userInput = Input.getInput(input);
+    switch (userInput) {
+      case Hard -> {
+        studySessionModel.setDifficulty(current, Difficulty.HARD);
+        studySessionModel.incrementQuestions();
+      }
+      case Easy -> {
+        studySessionModel.setDifficulty(current, Difficulty.EASY);
+        studySessionModel.incrementQuestions();
+      }
+      case Answer -> {
+        studySessionView.answer(current);
+        studySessionModel.incrementQuestions();
+      }
+      case Terminate -> end();
       default -> {
         studySessionView.options();
         handleInput(inputReader.read(), current);

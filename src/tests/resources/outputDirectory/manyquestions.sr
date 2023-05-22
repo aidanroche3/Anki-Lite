@@ -1,22 +1,22 @@
-[Q]Which method can resize a vector?[A]setSize(int size)[D]HARD
 [Q]Which continent is the driest inhabited continent on Earth?[A]Australia.[D]HARD
-[Q]Where are arrays stored in memory?[A]the heap[D]HARD
 [Q]This is a test question[A]answer[D]HARD
-[Q]Which country is known as the Land of a Thousand Lakes? [A] Finland.[D]HARD
-[Q]What is the largest island in the world?[A]The largest island is Greenland.[D]EASY
-[Q]Which country is famous for its fjords? [A] Norway.[D]EASY
-[Q]Which country is the largest in terms of land area?[A]The largest country is Russia.[D]EASY
-[Q]Which country is the smallest in terms of land area?[A]The smallest country is Vatican City.[D]EASY
+[Q]Which country is the driest inhabited continent on Earth?[A]Australia.[D]HARD
+[Q]What is the largest lake in North America? [A] The largest lake is Lake Superior.[D]HARD
 [Q]Which country is known as the Land of the Midnight Sun?[A]Norway.[D]EASY
-[Q]Which country is famous for its tulips and windmills?[A]The Netherlands.[D]EASY
-[Q]What is the largest lake in North America? [A] The largest lake is Lake Superior.[D]EASY
-[Q]Which country is the driest inhabited continent on Earth?[A]Australia.[D]EASY
-[Q]What is the largest river in Africa?[A]The largest river is the Nile River.[D]EASY
-[Q]What is the capital of Mexico? [A] The capital is Mexico City.[D]EASY
-[Q]What is the capital of Canada?[A]The capital is Ottawa.[D]EASY
-[Q]What is the largest coral reef system in the world?[A]The largest coral reef system is the Great Barrier Reef in Australia.[D]EASY
-[Q]Which country is located in both Europe and Asia?[A]Russia.[D]EASY
+[Q]Which country is famous for its fjords? [A] Norway.[D]EASY
 [Q]What is the capital of Argentina?[A]The capital is Buenos Aires.[D]EASY
+[Q]What is the largest coral reef system in the world?[A]The largest coral reef system is the Great Barrier Reef in Australia.[D]EASY
+[Q]Which country is known as the Land of a Thousand Lakes? [A] Finland.[D]EASY
+[Q]What is the capital of Mexico? [A] The capital is Mexico City.[D]EASY
+[Q]Which country is the smallest in terms of land area?[A]The smallest country is Vatican City.[D]EASY
+[Q]Which method can resize a vector?[A]setSize(int size)[D]EASY
+[Q]What is the largest island in the world?[A]The largest island is Greenland.[D]EASY
+[Q]Where are arrays stored in memory?[A]the heap[D]EASY
+[Q]Which country is the largest in terms of land area?[A]The largest country is Russia.[D]EASY
+[Q]Which country is famous for its tulips and windmills?[A]The Netherlands.[D]EASY
+[Q]What is the largest river in Africa?[A]The largest river is the Nile River.[D]EASY
+[Q]What is the capital of Canada?[A]The capital is Ottawa.[D]EASY
+[Q]Which country is located in both Europe and Asia?[A]Russia.[D]EASY
 [Q]Which country is known as the Land of Fire and Ice?[A]Iceland.[D]EASY
 [Q]Which city is located on two continents?[A]Istanbul, Turkey. It is located on both Europe and Asia.[D]EASY
 [Q]What is the largest desert in Asia?[A]The largest desert is the Gobi Desert.[D]EASY

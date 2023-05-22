@@ -15,6 +15,12 @@ import org.junit.jupiter.api.Test;
  */
 class StudySessionViewTest {
 
+  // color constants for output text
+  public static final String ANSI_RESET = "\u001B[0m";
+  public static final String ANSI_RED = "\u001B[31m";
+  public static final String ANSI_GREEN = "\u001B[32m";
+  public static final String ANSI_CYAN = "\u001B[36m";
+
   private final ByteArrayOutputStream output = new ByteArrayOutputStream();
   private PrintStream sysOut;
   private StudySessionView studySessionView;
@@ -38,10 +44,8 @@ class StudySessionViewTest {
   @Test
   public void testWelcome() {
     studySessionView.welcome();
-    String welcome = """
-        
-        Welcome to Anki-Lite!
-        To begin, input a valid .sr file to study from:\s""".replaceAll(
+    String welcome = ("\n" + ANSI_CYAN + "Welcome to Anki-Lite!" + ANSI_RESET + "\n"
+        + "To begin, input a valid .sr file to study from: ").replaceAll(
             "\\n|\\r\\n", System.getProperty("line.separator"));
     assertEquals(welcome, output.toString());
   }
@@ -109,7 +113,7 @@ class StudySessionViewTest {
   public void testOptions() {
     studySessionView.options();
     String options = """
-        Options: H to set hard, E to set easy, A to see answer, T to terminate.
+        Options: [H] Set Hard [E] Set Easy [A] See Answer [T] Terminate
         """.replaceAll("\\n|\\r\\n", System.getProperty("line.separator"));
     assertEquals(options, output.toString());
   }
@@ -119,8 +123,8 @@ class StudySessionViewTest {
    */
   @Test
   public void testDisplayQuestion() {
-    studySessionView.displayQuestion(testQuestion, 1);
-    String question = "1. Test question? ";
+    studySessionView.displayQuestion(testQuestion, 0);
+    String question = ANSI_RED + "1. Test question?" + ANSI_RESET + " ";
     assertEquals(question, output.toString());
   }
 
@@ -154,14 +158,16 @@ class StudySessionViewTest {
   @Test
   public void testStats() {
     studySessionView.stats(9, 3, 4, 6, 8);
-    String stats = """
-        Great work! Here are your stats for this session:\s
-        You answered 9 questions.
-        3 questions went from easy to hard.
-        4 questions went from hard to easy.
-        There are now 6 hard questions in the question bank.
-        There are now 8 easy questions in the question bank.
-        """.replaceAll("\\n|\\r\\n", System.getProperty("line.separator"));
+    String stats = ("Great work! Here are your stats for this session: \n"
+        + "You answered " + ANSI_CYAN + "9" + ANSI_RESET + " questions.\n"
+        + "3 questions went from " + ANSI_GREEN + "easy" + ANSI_RESET
+        + " to " + ANSI_RED + "hard." + ANSI_RESET + "\n"
+        + "4 questions went from " + ANSI_RED + "hard" + ANSI_RESET
+        + " to " + ANSI_GREEN + "easy." + ANSI_RESET + "\n"
+        + "There are now " + ANSI_RED + "6" + ANSI_RESET + " hard questions in the question bank.\n"
+        + "There are now " + ANSI_GREEN + "8" + ANSI_RESET
+        + " easy questions in the question bank.\n").replaceAll("\\n|\\r\\n",
+        System.getProperty("line.separator"));
     assertEquals(stats, output.toString());
   }
 
