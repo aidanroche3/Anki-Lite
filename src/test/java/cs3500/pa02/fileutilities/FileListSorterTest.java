@@ -21,20 +21,8 @@ import org.junit.jupiter.api.Test;
  */
 class FileListSorterTest {
 
-  Path path;
-  ArrayList<String> validTypes;
-  FileTypeVisitor visitor;
-  File arrays;
-  File test;
-  File vectors;
-  File java;
-  MarkDownFile arraysMd;
-  MarkDownFile testMd;
-  MarkDownFile vectorsMd;
-  MarkDownFile javaMd;
-  ArrayList<File> files;
-  ArrayList<MarkDownFile> mdFiles;
-  ArrayList<MarkDownFile> name;
+  private ArrayList<MarkDownFile> mdFiles;
+  private ArrayList<MarkDownFile> name;
 
   /**
    * Initializes the data to be tested
@@ -42,13 +30,17 @@ class FileListSorterTest {
    */
   @BeforeEach
   public void setup() {
-    path = Path.of("src/tests/resources/notes-root");
-    validTypes = new ArrayList<>(List.of(".md"));
-    visitor = new FileTypeVisitor(validTypes);
-    arrays = Path.of("src/tests/resources/notes-root/arrays.md").toFile();
-    test = Path.of("src/tests/resources/notes-root/test.md").toFile();
-    vectors = Path.of("src/tests/resources/notes-root/vectors.md").toFile();
-    java = Path.of("src/tests/resources/notes-root/lecture-notes/java.md").toFile();
+    Path path = Path.of("src/tests/resources/notes-root");
+    ArrayList<String> validTypes = new ArrayList<>(List.of(".md"));
+    FileTypeVisitor visitor = new FileTypeVisitor(validTypes);
+    File arrays = Path.of("src/tests/resources/notes-root/arrays.md").toFile();
+    File test = Path.of("src/tests/resources/notes-root/test.md").toFile();
+    File vectors = Path.of("src/tests/resources/notes-root/vectors.md").toFile();
+    File java = Path.of("src/tests/resources/notes-root/lecture-notes/java.md").toFile();
+    MarkDownFile arraysMd;
+    MarkDownFile testMd;
+    MarkDownFile vectorsMd;
+    MarkDownFile javaMd;
     try {
       FileTime arraysCreated =
           Files.readAttributes(arrays.toPath(), BasicFileAttributes.class).creationTime();
@@ -74,7 +66,7 @@ class FileListSorterTest {
     } catch (IOException e) {
       throw new IllegalArgumentException(e);
     }
-    files = visitor.getFiles();
+    ArrayList<File> files = visitor.getFiles();
     mdFiles = MarkDownFile.listToMarkDownFiles(files);
     name = new ArrayList<>(Arrays.asList(arraysMd, javaMd, testMd, vectorsMd));
   }

@@ -21,6 +21,7 @@ class StudySessionModelTest {
 
   private Question hydrogen;
   private Question sameQuestion;
+  private Question roentgenium;
   private ArrayList<Question> questions;
   private StudySessionModel model;
 
@@ -37,7 +38,7 @@ class StudySessionModelTest {
         "The symbol is H", Difficulty.HARD);
     Question oxygen = new Question("What is the chemical symbol for Oxygen?",
         "The symbol is O", Difficulty.EASY);
-    Question roentgenium = new Question("What element has the chemical symbol Rg?",
+    roentgenium = new Question("What element has the chemical symbol Rg?",
         "Roentgenium", Difficulty.HARD);
     questions = new ArrayList<>(Arrays.asList(hydrogen, sameQuestion, sameQuestionAndAnswer,
         oxygen, roentgenium));
@@ -52,6 +53,13 @@ class StudySessionModelTest {
     assertEquals(hydrogen, model.nextQuestion());
     model.incrementQuestions();
     assertEquals(sameQuestion, model.nextQuestion());
+    model.incrementQuestions();
+    model = new StudySessionModel(questions, 7);
+    model.incrementQuestions();
+    model.incrementQuestions();
+    model.incrementQuestions();
+    model.incrementQuestions();
+    assertEquals(roentgenium, model.nextQuestion());
     model.incrementQuestions();
     assertThrows(IllegalArgumentException.class, model::nextQuestion);
     model = new StudySessionModel(questions, 5);

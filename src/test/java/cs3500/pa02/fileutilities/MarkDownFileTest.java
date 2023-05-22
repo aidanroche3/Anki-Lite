@@ -17,16 +17,14 @@ import org.junit.jupiter.api.Test;
  */
 class MarkDownFileTest {
 
-  File arrays;
-  File test;
-  File vectors;
-  File invalidFormat;
-  File invalidPath;
-  File java;
-  MarkDownFile arraysMd;
-  MarkDownFile testMd;
-  MarkDownFile vectorsMd;
-  MarkDownFile javaMd;
+  private File arrays;
+  private File test;
+  private File vectors;
+  private File invalidFormat;
+  private File invalidPath;
+  private MarkDownFile arraysMd;
+  private MarkDownFile testMd;
+  private MarkDownFile vectorsMd;
 
   /**
    * Initializes the date for each test
@@ -38,11 +36,9 @@ class MarkDownFileTest {
     vectors = Path.of("src/tests/resources/notes-root/vectors.md").toFile();
     invalidFormat = Path.of("src/tests/resources/notes-root/invalid.pdf").toFile();
     invalidPath = Path.of("src/tests/resources/notes-root/invalid.md").toFile();
-    java = Path.of("src/tests/resources/notes-root/lecture-notes/java.md").toFile();
     arraysMd = new MarkDownFile(arrays);
     testMd = new MarkDownFile(test);
     vectorsMd = new MarkDownFile(vectors);
-    javaMd = new MarkDownFile(java);
   }
 
   /**

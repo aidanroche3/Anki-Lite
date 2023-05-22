@@ -16,40 +16,32 @@ import org.junit.jupiter.api.Test;
  */
 class ReadAsQuestionsTest {
 
-  File file;
-  File edgeCases;
-  File notSr;
-  File nonexistent;
-  ReadAsQuestions readAsQuestions;
-  ReadAsQuestions readAsQuestionsThrows;
-  ReadAsQuestions nonexistentReader;
-  ArrayList<Question> questions;
-  ArrayList<Question> sampleQuestions;
-  Question arraysOne;
-  Question arraysTwo;
-  Question test;
-  Question vector;
+  private File notSr;
+  private ReadAsQuestions readAsQuestionsThrows;
+  private ReadAsQuestions nonexistentReader;
+  private ArrayList<Question> questions;
+  private ArrayList<Question> sampleQuestions;
 
   /**
    * Initializing test data
    */
   @BeforeEach
   public void setup() {
-    file = Path.of("src/tests/resources/outputDirectory/samplesummary.sr").toFile();
-    edgeCases = Path.of("src/tests/resources/outputDirectory/edgecases.sr").toFile();
+    File file = Path.of("src/tests/resources/outputDirectory/samplesummary.sr").toFile();
+    File edgeCases = Path.of("src/tests/resources/outputDirectory/edgecases.sr").toFile();
     notSr = Path.of("src/nonexistent.md").toFile();
-    nonexistent = Path.of("src/nonexistent.sr").toFile();
-    readAsQuestions = new ReadAsQuestions(file);
+    File nonexistent = Path.of("src/nonexistent.sr").toFile();
+    ReadAsQuestions readAsQuestions = new ReadAsQuestions(file);
     readAsQuestionsThrows = new ReadAsQuestions(edgeCases);
     nonexistentReader = new ReadAsQuestions(nonexistent);
     questions = readAsQuestions.generateListOfQuestions();
-    arraysOne = new Question("Where are arrays stored in memory?",
+    Question arraysOne = new Question("Where are arrays stored in memory?",
         "the heap", Difficulty.HARD);
-    arraysTwo = new Question("T/F Arrays can hold multiple data types",
+    Question arraysTwo = new Question("T/F Arrays can hold multiple data types",
         "false", Difficulty.HARD);
-    test = new Question("This is a test question",
+    Question test = new Question("This is a test question",
         "answer", Difficulty.HARD);
-    vector = new Question("Which method can resize a vector?",
+    Question vector = new Question("Which method can resize a vector?",
         "setSize(int size)", Difficulty.HARD);
     sampleQuestions = new ArrayList<>(Arrays.asList(arraysOne, arraysTwo, test, vector));
   }

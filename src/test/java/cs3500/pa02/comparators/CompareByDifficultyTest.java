@@ -12,11 +12,11 @@ import org.junit.jupiter.api.Test;
  */
 class CompareByDifficultyTest {
 
-  Question arraysOne;
-  Question arraysTwo;
-  Question test;
-  Question vector;
-  CompareByDifficulty compareByDifficulty;
+  private Question arraysOne;
+  private Question arraysTwo;
+  private Question test;
+  private Question vector;
+  private CompareByDifficulty compareByDifficulty;
 
   /**
    * Initializing the test data

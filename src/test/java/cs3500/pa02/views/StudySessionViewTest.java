@@ -24,7 +24,7 @@ class StudySessionViewTest {
   private final ByteArrayOutputStream output = new ByteArrayOutputStream();
   private PrintStream sysOut;
   private StudySessionView studySessionView;
-  Question testQuestion;
+  private Question testQuestion;
 
   /**
    * Initiates the test data

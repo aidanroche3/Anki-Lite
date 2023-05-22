@@ -21,22 +21,13 @@ import org.junit.jupiter.api.Test;
  */
 class FileTypeVisitorTest {
 
-  ArrayList<String> onlyMd;
-  ArrayList<String> withPdf;
-  Path path;
-  Path arraysPath;
-  File arrays;
-  File notes;
-  File test;
-  File vectors;
-  File duedates;
-  File java;
-  ArrayList<File> mdFiles;
-  ArrayList<File> bothFiles;
-  FileTypeVisitor md;
-  FileTypeVisitor both;
-  FileVisitResult result;
-  BasicFileAttributes attrs;
+  private Path path;
+  private ArrayList<File> mdFiles;
+  private ArrayList<File> bothFiles;
+  private FileTypeVisitor md;
+  private FileTypeVisitor both;
+  private FileVisitResult result;
+  private BasicFileAttributes attrs;
 
   /**
    * Sets the initial values used for testing
@@ -44,18 +35,18 @@ class FileTypeVisitorTest {
    */
   @BeforeEach
   public void setup() {
-    onlyMd = new ArrayList<>(List.of(".md"));
-    withPdf = new ArrayList<>(Arrays.asList(".md", ".pdf"));
     path = Path.of("src/tests/resources/notes-root");
-    arraysPath = Path.of("src/tests/resources/notes-root/arrays.md");
-    arrays = arraysPath.toFile();
-    notes = Path.of("src/tests/resources/notes-root/notes.pdf").toFile();
-    test = Path.of("src/tests/resources/notes-root/test.md").toFile();
-    vectors = Path.of("src/tests/resources/notes-root/vectors.md").toFile();
-    duedates = Path.of("src/tests/resources/notes-root/lecture-notes/duedates.pdf").toFile();
-    java = Path.of("src/tests/resources/notes-root/lecture-notes/java.md").toFile();
+    Path arraysPath = Path.of("src/tests/resources/notes-root/arrays.md");
+    File arrays = arraysPath.toFile();
+    File notes = Path.of("src/tests/resources/notes-root/notes.pdf").toFile();
+    File test = Path.of("src/tests/resources/notes-root/test.md").toFile();
+    File vectors = Path.of("src/tests/resources/notes-root/vectors.md").toFile();
+    File duedates = Path.of("src/tests/resources/notes-root/lecture-notes/duedates.pdf").toFile();
+    File java = Path.of("src/tests/resources/notes-root/lecture-notes/java.md").toFile();
     mdFiles = new ArrayList<>(Arrays.asList(arrays, java, test, vectors));
     bothFiles = new ArrayList<>(Arrays.asList(arrays, duedates, java, notes, test, vectors));
+    ArrayList<String> onlyMd = new ArrayList<>(List.of(".md"));
+    ArrayList<String> withPdf = new ArrayList<>(Arrays.asList(".md", ".pdf"));
     md = new FileTypeVisitor(onlyMd);
     both = new FileTypeVisitor(withPdf);
     result = FileVisitResult.CONTINUE;

@@ -12,13 +12,13 @@ import org.junit.jupiter.api.Test;
  */
 class QuestionTest {
 
-  Question hydrogen;
-  Question hydrogenCopy;
-  Question sameQuestion;
-  Question sameQuestionAndAnswer;
-  Question oxygen;
-  Question roentgenium;
-  Object object;
+  private Question hydrogen;
+  private Question hydrogenCopy;
+  private Question sameQuestion;
+  private Question sameQuestionAndAnswer;
+  private Question oxygen;
+  private Question roentgenium;
+  private Object object;
 
   /**
    * Initializing the testing data

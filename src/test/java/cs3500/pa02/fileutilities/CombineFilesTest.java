@@ -15,27 +15,22 @@ import org.junit.jupiter.api.Test;
  */
 class CombineFilesTest {
 
-  File arrays;
-  File test;
-  File vectors;
-  File java;
-  File fake;
-  ArrayList<File> twoFiles;
-  ArrayList<File> files;
-  ArrayList<File> withFake;
-  String arraysAndTest;
-  String allCombined;
+  private ArrayList<File> twoFiles;
+  private ArrayList<File> files;
+  private ArrayList<File> withFake;
+  private String arraysAndTest;
+  private String allCombined;
 
   /**
    * Initializes the data for tests
    */
   @BeforeEach
   public void setup() {
-    arrays = Path.of("src/tests/resources/notes-root/arrays.md").toFile();
-    test = Path.of("src/tests/resources/notes-root/test.md").toFile();
-    vectors = Path.of("src/tests/resources/notes-root/vectors.md").toFile();
-    java = Path.of("src/tests/resources/notes-root/lecture-notes/java.md").toFile();
-    fake = Path.of("src/tests/resources/notes-root/nonexistent.md").toFile();
+    File arrays = Path.of("src/tests/resources/notes-root/arrays.md").toFile();
+    File test = Path.of("src/tests/resources/notes-root/test.md").toFile();
+    File vectors = Path.of("src/tests/resources/notes-root/vectors.md").toFile();
+    File java = Path.of("src/tests/resources/notes-root/lecture-notes/java.md").toFile();
+    File fake = Path.of("src/tests/resources/notes-root/nonexistent.md").toFile();
     twoFiles = new ArrayList<>(Arrays.asList(test, arrays));
     files = new ArrayList<>(Arrays.asList(arrays, test, vectors, java));
     withFake = new ArrayList<>(Arrays.asList(test, fake));

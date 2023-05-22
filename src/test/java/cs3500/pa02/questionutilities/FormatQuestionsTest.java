@@ -13,28 +13,24 @@ import org.junit.jupiter.api.Test;
  */
 class FormatQuestionsTest {
 
-  Question arraysOne;
-  Question arraysTwo;
-  Question test;
-  Question vector;
-  ArrayList<Question> sampleQuestions;
-  String content;
-  FormatQuestions formatQuestions;
+  private String content;
+  private FormatQuestions formatQuestions;
 
   /**
    * Initializing the test data
    */
   @BeforeEach
   public void setup() {
-    arraysOne = new Question("Where are arrays stored in memory?",
+    Question arraysOne = new Question("Where are arrays stored in memory?",
         "the heap", Difficulty.HARD);
-    arraysTwo = new Question("T/F Arrays can hold multiple data types",
+    Question arraysTwo = new Question("T/F Arrays can hold multiple data types",
         "false", Difficulty.HARD);
-    test = new Question("This is a test question",
+    Question test = new Question("This is a test question",
         "answer", Difficulty.EASY);
-    vector = new Question("Which method can resize a vector?",
+    Question vector = new Question("Which method can resize a vector?",
         "setSize(int size)", Difficulty.HARD);
-    sampleQuestions = new ArrayList<>(Arrays.asList(arraysOne, arraysTwo, test, vector));
+    ArrayList<Question> sampleQuestions =
+        new ArrayList<>(Arrays.asList(arraysOne, arraysTwo, test, vector));
     content = """
         [Q]Where are arrays stored in memory?[A]the heap[D]HARD
         [Q]T/F Arrays can hold multiple data types[A]false[D]HARD
