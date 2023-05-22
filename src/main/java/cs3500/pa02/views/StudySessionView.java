@@ -120,6 +120,8 @@ public class StudySessionView {
 
   /**
    * Displays a custom message
+   *
+   * @param message a custom message to print
    */
   public void custom(String message) {
     System.out.print(message);

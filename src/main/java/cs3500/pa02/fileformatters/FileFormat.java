@@ -21,6 +21,8 @@ public abstract class FileFormat {
 
   /**
    * Extracts the important content from a String
+   *
+   * @return a String with the extracted content
    */
   public abstract String extract();
 

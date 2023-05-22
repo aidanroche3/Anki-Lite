@@ -83,6 +83,7 @@ public class StudySessionModel {
    *
    * @param totalHard the total hard questions in the bank
    * @param totalEasy the total easy questions in the bank
+   * @return a formatted String of the packaged stats
    */
   public String packageStats(int totalHard, int totalEasy) {
     return "Great work! Here are your stats for this session: \n"
