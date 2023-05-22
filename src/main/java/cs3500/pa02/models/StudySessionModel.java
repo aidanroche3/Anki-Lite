@@ -1,5 +1,10 @@
 package cs3500.pa02.models;
 
+import static cs3500.pa02.views.StudySessionView.ANSI_CYAN;
+import static cs3500.pa02.views.StudySessionView.ANSI_GREEN;
+import static cs3500.pa02.views.StudySessionView.ANSI_RED;
+import static cs3500.pa02.views.StudySessionView.ANSI_RESET;
+
 import cs3500.pa02.Difficulty;
 import cs3500.pa02.questionutilities.Question;
 import java.util.ArrayList;
@@ -57,24 +62,6 @@ public class StudySessionModel {
   }
 
   /**
-   * Gets the current question
-   *
-   * @return the current index
-   */
-  public int getEasyToHard() {
-    return this.easyToHard;
-  }
-
-  /**
-   * Gets the current question
-   *
-   * @return the current index
-   */
-  public int getHardToEasy() {
-    return this.hardToEasy;
-  }
-
-  /**
    * Sets the difficulty of the question and updates the stats
    *
    * @param current the current question
@@ -89,6 +76,25 @@ public class StudySessionModel {
       hardToEasy++;
       questions.get(currentQuestion).setDifficulty(difficulty);
     }
+  }
+
+  /**
+   * Packages the statistics as a String
+   *
+   * @param totalHard the total hard questions in the bank
+   * @param totalEasy the total easy questions in the bank
+   */
+  public String packageStats(int totalHard, int totalEasy) {
+    return "Great work! Here are your stats for this session: \n"
+        + "You answered " + ANSI_CYAN + this.currentQuestion + ANSI_RESET + " questions.\n"
+        + this.easyToHard + " questions went from " + ANSI_GREEN + "easy" + ANSI_RESET
+        + " to " + ANSI_RED + "hard" + ANSI_RESET + ".\n"
+        + this.hardToEasy + " questions went from " + ANSI_RED + "hard" + ANSI_RESET
+        + " to " + ANSI_GREEN + "easy" + ANSI_RESET + ".\n"
+        + "There are now " + ANSI_RED + totalHard + ANSI_RESET
+        + " hard questions in the question bank.\n"
+        + "There are now " + ANSI_GREEN + totalEasy + ANSI_RESET
+        + " easy questions in the question bank.\n";
   }
 
 }

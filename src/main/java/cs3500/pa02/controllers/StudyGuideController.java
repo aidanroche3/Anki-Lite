@@ -65,11 +65,11 @@ public class StudyGuideController implements Controller {
     // initializing a new study guide with the String of combined content
     StudyGuide studyGuide = new StudyGuide(combinedFiles);
     // initializing a String of the summarized content from the combined content
-    String formattedFiles = studyGuide.summarizeContent();
+    String formattedFiles = studyGuide.extract();
     // initializing a new question and answer with the String of combined content
     QuestionAndAnswer questions = new QuestionAndAnswer(combinedFiles);
     // initializing a String of the extracted questions from the combined content
-    String questionsAndAnswer = questions.extractQuestions();
+    String questionsAndAnswer = questions.extract();
     // initializing a new write files to path
     WriteFilesToPath fileWriter = new WriteFilesToPath();
     // writing the summarized content at the output path

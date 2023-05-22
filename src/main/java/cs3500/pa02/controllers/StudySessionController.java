@@ -157,9 +157,9 @@ public class StudySessionController implements Controller {
       throw new RuntimeException(e);
     }
     studySessionView.separator();
-    studySessionView.stats(studySessionModel.getCurrent(), studySessionModel.getEasyToHard(),
-        studySessionModel.getHardToEasy(), formatQuestions.getNumHard(),
+    String stats = studySessionModel.packageStats(formatQuestions.getNumHard(),
         formatQuestions.getNumEasy());
+    studySessionView.custom(stats);
     studySessionView.goodbye();
   }
 

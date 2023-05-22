@@ -35,7 +35,7 @@ class StudyGuideControllerTest {
   }
 
   /**
-   * Tests the validateArgs method
+   * Tests the validateArgs method indirectly
    */
   @Test
   public void testValidateArgs() {

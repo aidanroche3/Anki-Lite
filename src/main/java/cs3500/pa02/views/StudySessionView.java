@@ -119,27 +119,10 @@ public class StudySessionView {
   }
 
   /**
-   * Displays the user stats
-   *
-   * @param questionsAnswered the number of questions answered
-   * @param easyToHard the number of questions that went from easy to hard
-   * @param hardToEasy the number of questions that went from hard to easy
-   * @param totalHard the number of hard questions in the bank
-   * @param totalEasy the number of easy questions in the bank
+   * Displays a custom message
    */
-  public void stats(int questionsAnswered, int easyToHard, int hardToEasy,
-                    int totalHard, int totalEasy) {
-    System.out.println("Great work! Here are your stats for this session: ");
-    System.out.println("You answered " + ANSI_CYAN + questionsAnswered + ANSI_RESET
-        + " questions.");
-    System.out.println(easyToHard + " questions went from "
-        + ANSI_GREEN + "easy" + ANSI_RESET + " to " + ANSI_RED + "hard" + ANSI_RESET + ".");
-    System.out.println(hardToEasy + " questions went from "
-        + ANSI_RED + "hard" + ANSI_RESET + " to " + ANSI_GREEN + "easy" + ANSI_RESET + ".");
-    System.out.println("There are now " + ANSI_RED + totalHard + ANSI_RESET
-        + " hard questions in the question bank.");
-    System.out.println("There are now " + ANSI_GREEN + totalEasy + ANSI_RESET
-        + " easy questions in the question bank.");
+  public void custom(String message) {
+    System.out.print(message);
   }
 
   /**

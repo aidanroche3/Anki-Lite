@@ -20,6 +20,11 @@ public abstract class FileFormat {
   }
 
   /**
+   * Extracts the important content from a String
+   */
+  public abstract String extract();
+
+  /**
    * Returns the previous character in the content string, ' ' if previous is out of bounds
    *
    * @param content the content

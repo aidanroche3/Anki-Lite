@@ -49,8 +49,8 @@ class QuestionAndAnswerTest {
       """;
 
   @Test
-  public void testExtractQuestions() {
-    assertEquals(formatted, new QuestionAndAnswer(arraysAndTest).extractQuestions());
+  public void testExtract() {
+    assertEquals(formatted, new QuestionAndAnswer(arraysAndTest).extract());
   }
 
 }

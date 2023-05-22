@@ -150,10 +150,10 @@ class StudyGuideTest {
    * Tests for the summarizeContent method
    */
   @Test
-  public void testSummarizeContent() {
+  public void testExtract() {
     StudyGuide arrays = new StudyGuide(arraysAndTest);
     StudyGuide all = new StudyGuide(allCombined);
-    assertEquals(arraysAndTestSummarized, arrays.summarizeContent());
-    assertEquals(allCombinedSummarized, all.summarizeContent());
+    assertEquals(arraysAndTestSummarized, arrays.extract());
+    assertEquals(allCombinedSummarized, all.extract());
   }
 }

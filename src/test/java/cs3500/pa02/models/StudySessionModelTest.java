@@ -1,5 +1,9 @@
 package cs3500.pa02.models;
 
+import static cs3500.pa02.views.StudySessionView.ANSI_CYAN;
+import static cs3500.pa02.views.StudySessionView.ANSI_GREEN;
+import static cs3500.pa02.views.StudySessionView.ANSI_RED;
+import static cs3500.pa02.views.StudySessionView.ANSI_RESET;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
@@ -91,28 +95,25 @@ class StudySessionModelTest {
   }
 
   /**
-   * Tests the getEasyToHard method
+   * Tests the packageStats
    */
   @Test
-  public void testGetEasyToHard() {
-    model = new StudySessionModel(questions, 5);
-    model.setDifficulty(hydrogen, Difficulty.EASY);
-    model.setDifficulty(hydrogen, Difficulty.HARD);
-    model.setDifficulty(hydrogen, Difficulty.HARD);
-    model.setDifficulty(hydrogen, Difficulty.EASY);
-    assertEquals(1, model.getEasyToHard());
+  public void testPackageStats() {
+    model = new StudySessionModel(questions, 3);
+    model.setDifficulty(questions.get(1), Difficulty.HARD);
+    model.incrementQuestions();
+    String stats = model.packageStats(3, 1);
+    String expected = "Great work! Here are your stats for this session: \n"
+        + "You answered " + ANSI_CYAN + "1" + ANSI_RESET + " questions.\n"
+        + "1 questions went from " + ANSI_GREEN + "easy" + ANSI_RESET
+        + " to " + ANSI_RED + "hard" + ANSI_RESET + ".\n"
+        + "0 questions went from " + ANSI_RED + "hard" + ANSI_RESET
+        + " to " + ANSI_GREEN + "easy" + ANSI_RESET + ".\n"
+        + "There are now " + ANSI_RED + "3" + ANSI_RESET + " hard questions in the question bank.\n"
+        + "There are now " + ANSI_GREEN + "1" + ANSI_RESET
+        + " easy questions in the question bank.\n";
+    assertEquals(expected, stats);
   }
 
-  /**
-   * Tests the getHardToEasy method
-   */
-  @Test
-  public void testGetHardToEasy() {
-    model = new StudySessionModel(questions, 5);
-    model.setDifficulty(hydrogen, Difficulty.HARD);
-    model.setDifficulty(hydrogen, Difficulty.EASY);
-    model.setDifficulty(hydrogen, Difficulty.HARD);
-    model.setDifficulty(hydrogen, Difficulty.EASY);
-    assertEquals(2, model.getHardToEasy());
-  }
+
 }

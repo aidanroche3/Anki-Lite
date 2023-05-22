@@ -33,9 +33,9 @@ class WriteFilesToPathTest {
     String combined;
     combined = combine.getCombinedFiles();
     StudyGuide studyGuide = new StudyGuide(combined);
-    String studyGuideOutput = studyGuide.summarizeContent();
+    String studyGuideOutput = studyGuide.extract();
     QuestionAndAnswer questions = new QuestionAndAnswer(combined);
-    String questionOutput = questions.extractQuestions();
+    String questionOutput = questions.extract();
     Path sampleMd = Path.of("src/tests/resources/outputDirectory/samplesummary.md");
     Path writeAtMd = Path.of("src/tests/resources/outputDirectory/test.md");
     Path sampleSr = Path.of("src/tests/resources/outputDirectory/samplesummary.sr");

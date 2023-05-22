@@ -19,7 +19,8 @@ public class QuestionAndAnswer extends FileFormat {
    *
    * @return a String of the questions formatted for a .sr file
    */
-  public String extractQuestions() {
+  @Override
+  public String extract() {
     StringBuilder extractedQuestions = new StringBuilder();
     boolean bracketed = false;
     StringBuilder bracketContent = new StringBuilder();

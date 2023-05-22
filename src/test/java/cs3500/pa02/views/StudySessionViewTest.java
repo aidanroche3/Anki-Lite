@@ -31,8 +31,8 @@ class StudySessionViewTest {
    */
   @BeforeEach
   public void setup() {
-    System.setOut(new PrintStream(output));
     sysOut = System.out;
+    System.setOut(new PrintStream(output));
     studySessionView = new StudySessionView();
     testQuestion = new Question("Test question?", "Answer", Difficulty.HARD);
   }
@@ -156,19 +156,10 @@ class StudySessionViewTest {
    * Tests the stats method
    */
   @Test
-  public void testStats() {
-    studySessionView.stats(9, 3, 4, 6, 8);
-    String stats = ("Great work! Here are your stats for this session: \n"
-        + "You answered " + ANSI_CYAN + "9" + ANSI_RESET + " questions.\n"
-        + "3 questions went from " + ANSI_GREEN + "easy" + ANSI_RESET
-        + " to " + ANSI_RED + "hard" + ANSI_RESET + ".\n"
-        + "4 questions went from " + ANSI_RED + "hard" + ANSI_RESET
-        + " to " + ANSI_GREEN + "easy" + ANSI_RESET + ".\n"
-        + "There are now " + ANSI_RED + "6" + ANSI_RESET + " hard questions in the question bank.\n"
-        + "There are now " + ANSI_GREEN + "8" + ANSI_RESET
-        + " easy questions in the question bank.\n").replaceAll("\\n|\\r\\n",
-        System.getProperty("line.separator"));
-    assertEquals(stats, output.toString());
+  public void testCustom() {
+    String custom = "This is a custom message\n";
+    studySessionView.custom(custom);
+    assertEquals(custom, output.toString());
   }
 
   /**

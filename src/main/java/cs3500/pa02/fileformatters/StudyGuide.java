@@ -19,7 +19,8 @@ public class StudyGuide extends FileFormat {
    *
    * @return the content String summarized to only contain headings and bracketed content
    */
-  public String summarizeContent() {
+  @Override
+  public String extract() {
     StringBuilder summarizedContent = new StringBuilder();
     boolean heading = false;
     boolean bracketed = false;
