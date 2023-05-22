@@ -2,6 +2,7 @@ package cs3500.pa02.questionutilities;
 
 import cs3500.pa02.comparators.CompareByDifficulty;
 import java.util.ArrayList;
+import java.util.Collections;
 
 /**
  * Class for randomizing a list of questions
@@ -25,6 +26,7 @@ public class RandomizeQuestions {
    * @return the current list of questions randomized
    */
   public ArrayList<Question> getRandomizedQuestions() {
+    Collections.shuffle(questions);
     questions.sort(new CompareByDifficulty());
     return questions;
   }

@@ -45,7 +45,10 @@ class RandomizeQuestionsTest {
   @Test
   public void testGetRandomizedQuestions() {
     ArrayList<Question> questions = randomizeQuestions.getRandomizedQuestions();
-    assertEquals(sortedQuestions, questions);
+    assertEquals(Difficulty.HARD, questions.get(0).getDifficulty());
+    assertEquals(Difficulty.HARD, questions.get(1).getDifficulty());
+    assertEquals(Difficulty.EASY, questions.get(2).getDifficulty());
+    assertEquals(Difficulty.EASY, questions.get(3).getDifficulty());
   }
 
 }

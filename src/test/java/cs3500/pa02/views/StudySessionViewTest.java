@@ -56,10 +56,8 @@ class StudySessionViewTest {
   @Test
   public void testBegin() {
     studySessionView.begin();
-    String begin = """
-        Great! Let's begin!
-        
-        """.replaceAll("\\n|\\r\\n", System.getProperty("line.separator"));
+    String begin = (ANSI_CYAN + "Great! Let's begin!" + ANSI_RESET + "\n\n")
+        .replaceAll("\\n|\\r\\n", System.getProperty("line.separator"));
     assertEquals(begin, output.toString());
   }
 
@@ -69,7 +67,7 @@ class StudySessionViewTest {
   @Test
   public void testInvalidPath() {
     studySessionView.invalidPath();
-    String invalidPath = "Please enter a valid path to a .sr file: ";
+    String invalidPath = ANSI_RED + "Please enter a valid path to a .sr file: " + ANSI_RESET;
     assertEquals(invalidPath, output.toString());
   }
 
@@ -89,8 +87,9 @@ class StudySessionViewTest {
   @Test
   public void testInvalidNumberPrompt() {
     studySessionView.invalidNumberPrompt(5);
-    String invalidNumberPrompt = "There are 5 questions to study. "
-        + "Please enter a valid number of questions: ";
+    String invalidNumberPrompt = "There are " + ANSI_CYAN + "5"
+        + ANSI_RESET + " questions to study. "
+        + ANSI_RED + "Please enter a valid number of questions: " + ANSI_RESET;
     assertEquals(invalidNumberPrompt, output.toString());
   }
 
@@ -112,9 +111,10 @@ class StudySessionViewTest {
   @Test
   public void testOptions() {
     studySessionView.options();
-    String options = """
-        Options: [H] Set Hard [E] Set Easy [A] See Answer [T] Terminate
-        """.replaceAll("\\n|\\r\\n", System.getProperty("line.separator"));
+    String options = ("Options: [" + ANSI_RED + "H" + ANSI_RESET + "] Set Hard ["
+        + ANSI_GREEN + "E" + ANSI_RESET + "] Set Easy [" + ANSI_CYAN + "A" + ANSI_RESET
+        + "] See Answer [" + ANSI_RED + "T" + ANSI_RESET + "] Terminate\n").replaceAll("\\n|\\r\\n",
+        System.getProperty("line.separator"));
     assertEquals(options, output.toString());
   }
 
@@ -161,9 +161,9 @@ class StudySessionViewTest {
     String stats = ("Great work! Here are your stats for this session: \n"
         + "You answered " + ANSI_CYAN + "9" + ANSI_RESET + " questions.\n"
         + "3 questions went from " + ANSI_GREEN + "easy" + ANSI_RESET
-        + " to " + ANSI_RED + "hard." + ANSI_RESET + "\n"
+        + " to " + ANSI_RED + "hard" + ANSI_RESET + ".\n"
         + "4 questions went from " + ANSI_RED + "hard" + ANSI_RESET
-        + " to " + ANSI_GREEN + "easy." + ANSI_RESET + "\n"
+        + " to " + ANSI_GREEN + "easy" + ANSI_RESET + ".\n"
         + "There are now " + ANSI_RED + "6" + ANSI_RESET + " hard questions in the question bank.\n"
         + "There are now " + ANSI_GREEN + "8" + ANSI_RESET
         + " easy questions in the question bank.\n").replaceAll("\\n|\\r\\n",
@@ -177,9 +177,8 @@ class StudySessionViewTest {
   @Test
   public void testGoodbye() {
     studySessionView.goodbye();
-    String goodbye = """
-        Thanks for studying! Have a great day!
-        """.replaceAll(
+    String goodbye = (ANSI_CYAN
+        + "Thanks for studying! Have a great day!" + ANSI_RESET + "\n").replaceAll(
         "\\n|\\r\\n", System.getProperty("line.separator"));
     assertEquals(goodbye, output.toString());
   }

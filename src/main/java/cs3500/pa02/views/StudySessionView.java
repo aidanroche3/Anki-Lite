@@ -8,10 +8,23 @@ import cs3500.pa02.questionutilities.Question;
  */
 public class StudySessionView {
 
-  // color constants for output text
+  // color constants for colored console output
+
+  /**
+   * ANSI escape code
+   */
   public static final String ANSI_RESET = "\u001B[0m";
+  /**
+   * ANSI red color
+   */
   public static final String ANSI_RED = "\u001B[31m";
+  /**
+   * ANSI green color
+   */
   public static final String ANSI_GREEN = "\u001B[32m";
+  /**
+   * ANSI cyan color
+   */
   public static final String ANSI_CYAN = "\u001B[36m";
 
   /**
@@ -27,7 +40,7 @@ public class StudySessionView {
    * Message for beginning the session after initial input
    */
   public void begin() {
-    System.out.println("Great! Let's begin!");
+    System.out.println(ANSI_CYAN + "Great! Let's begin!" + ANSI_RESET);
     System.out.println();
   }
 
@@ -35,7 +48,7 @@ public class StudySessionView {
    * Prompt for when the user inputs an invalid path
    */
   public void invalidPath() {
-    System.out.print("Please enter a valid path to a .sr file: ");
+    System.out.print(ANSI_RED + "Please enter a valid path to a .sr file: " + ANSI_RESET);
   }
 
   /**
@@ -51,8 +64,8 @@ public class StudySessionView {
    * @param numQuestions the number of available questions
    */
   public void invalidNumberPrompt(int numQuestions) {
-    System.out.print("There are " + numQuestions + " questions to study. "
-        + "Please enter a valid number of questions: ");
+    System.out.print("There are " + ANSI_CYAN + numQuestions + ANSI_RESET + " questions to study. "
+        + ANSI_RED + "Please enter a valid number of questions: " + ANSI_RESET);
   }
 
   /**
@@ -66,7 +79,11 @@ public class StudySessionView {
    * Displays the user's option for a question
    */
   public void options() {
-    System.out.println("Options: [H] Set Hard [E] Set Easy [A] See Answer [T] Terminate");
+    System.out.println("Options: ["
+        + ANSI_RED + "H" + ANSI_RESET + "] Set Hard ["
+        + ANSI_GREEN + "E" + ANSI_RESET + "] Set Easy ["
+        + ANSI_CYAN + "A" + ANSI_RESET + "] See Answer ["
+        + ANSI_RED + "T" + ANSI_RESET + "] Terminate");
   }
 
   /**
@@ -116,9 +133,9 @@ public class StudySessionView {
     System.out.println("You answered " + ANSI_CYAN + questionsAnswered + ANSI_RESET
         + " questions.");
     System.out.println(easyToHard + " questions went from "
-        + ANSI_GREEN + "easy" + ANSI_RESET + " to " + ANSI_RED + "hard." + ANSI_RESET);
+        + ANSI_GREEN + "easy" + ANSI_RESET + " to " + ANSI_RED + "hard" + ANSI_RESET + ".");
     System.out.println(hardToEasy + " questions went from "
-        + ANSI_RED + "hard" + ANSI_RESET + " to " + ANSI_GREEN + "easy." + ANSI_RESET);
+        + ANSI_RED + "hard" + ANSI_RESET + " to " + ANSI_GREEN + "easy" + ANSI_RESET + ".");
     System.out.println("There are now " + ANSI_RED + totalHard + ANSI_RESET
         + " hard questions in the question bank.");
     System.out.println("There are now " + ANSI_GREEN + totalEasy + ANSI_RESET
@@ -129,7 +146,7 @@ public class StudySessionView {
    * Final display message
    */
   public void goodbye() {
-    System.out.println("Thanks for studying! Have a great day!");
+    System.out.println(ANSI_CYAN + "Thanks for studying! Have a great day!" + ANSI_RESET);
   }
 
 }
