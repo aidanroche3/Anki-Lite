@@ -28,7 +28,7 @@ class DriverTest {
     sysIn = System.in;
     ByteArrayInputStream mockInputStream = new ByteArrayInputStream(
         ("""
-            src/tests/resources/outputDirectory/manyquestions.sr
+            src/manyquestions.sr
             3
             a
             t

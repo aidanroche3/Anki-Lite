@@ -26,7 +26,7 @@ class StudySessionControllerTest {
     userTerminate = new ByteArrayInputStream("""
         src/tests/resources/nonexistent.txt
         src/tests/resources/outputDirectory/
-        src/tests/resources/outputDirectory/manyquestions.sr
+        src/manyquestions.sr
         -1
         h
         10
@@ -41,7 +41,7 @@ class StudySessionControllerTest {
         t
         """.replaceAll("\\n|\\r\\n", System.getProperty("line.separator")).getBytes());
     naturalTerminate = new ByteArrayInputStream("""
-        src/tests/resources/outputDirectory/manyquestions.sr
+        src/manyquestions.sr
         6
         h
         h
