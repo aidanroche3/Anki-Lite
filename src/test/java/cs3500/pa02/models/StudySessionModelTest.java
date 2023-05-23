@@ -1,9 +1,9 @@
 package cs3500.pa02.models;
 
-import static cs3500.pa02.views.StudySessionView.ANSI_CYAN;
-import static cs3500.pa02.views.StudySessionView.ANSI_GREEN;
-import static cs3500.pa02.views.StudySessionView.ANSI_RED;
-import static cs3500.pa02.views.StudySessionView.ANSI_RESET;
+import static cs3500.pa02.views.StudySessionConsoleView.ANSI_CYAN;
+import static cs3500.pa02.views.StudySessionConsoleView.ANSI_GREEN;
+import static cs3500.pa02.views.StudySessionConsoleView.ANSI_RED;
+import static cs3500.pa02.views.StudySessionConsoleView.ANSI_RESET;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 

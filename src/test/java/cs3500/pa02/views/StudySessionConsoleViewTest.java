@@ -13,7 +13,7 @@ import org.junit.jupiter.api.Test;
 /**
  * Class for testing StudySessionView and its associated methods
  */
-class StudySessionViewTest {
+class StudySessionConsoleViewTest {
 
   // color constants for output text
   public static final String ANSI_RESET = "\u001B[0m";
@@ -23,7 +23,7 @@ class StudySessionViewTest {
 
   private final ByteArrayOutputStream output = new ByteArrayOutputStream();
   private PrintStream sysOut;
-  private StudySessionView studySessionView;
+  private StudySessionConsoleView studySessionConsoleView;
   private Question testQuestion;
 
   /**
@@ -33,7 +33,7 @@ class StudySessionViewTest {
   public void setup() {
     sysOut = System.out;
     System.setOut(new PrintStream(output));
-    studySessionView = new StudySessionView();
+    studySessionConsoleView = new StudySessionConsoleView();
     testQuestion = new Question("Test question?", "Answer", Difficulty.HARD);
   }
 
@@ -43,7 +43,7 @@ class StudySessionViewTest {
    */
   @Test
   public void testWelcome() {
-    studySessionView.welcome();
+    studySessionConsoleView.welcome();
     String welcome = ("\n" + ANSI_CYAN + "Welcome to Anki-Lite!" + ANSI_RESET + "\n"
         + "To begin, input a valid .sr file to study from: ").replaceAll(
             "\\n|\\r\\n", System.getProperty("line.separator"));
@@ -55,7 +55,7 @@ class StudySessionViewTest {
    */
   @Test
   public void testBegin() {
-    studySessionView.begin();
+    studySessionConsoleView.begin();
     String begin = (ANSI_CYAN + "Great! Let's begin!" + ANSI_RESET + "\n\n")
         .replaceAll("\\n|\\r\\n", System.getProperty("line.separator"));
     assertEquals(begin, output.toString());
@@ -66,7 +66,7 @@ class StudySessionViewTest {
    */
   @Test
   public void testInvalidPath() {
-    studySessionView.invalidPath();
+    studySessionConsoleView.invalidPath();
     String invalidPath = ANSI_RED + "Please enter a valid path to a .sr file: " + ANSI_RESET;
     assertEquals(invalidPath, output.toString());
   }
@@ -76,7 +76,7 @@ class StudySessionViewTest {
    */
   @Test
   public void testInitialPrompt() {
-    studySessionView.initialPrompt();
+    studySessionConsoleView.initialPrompt();
     String initialPrompt = "How many questions would you like to study? ";
     assertEquals(initialPrompt, output.toString());
   }
@@ -86,7 +86,7 @@ class StudySessionViewTest {
    */
   @Test
   public void testInvalidNumberPrompt() {
-    studySessionView.invalidNumberPrompt(5);
+    studySessionConsoleView.invalidNumberPrompt(5);
     String invalidNumberPrompt = "There are " + ANSI_CYAN + "5"
         + ANSI_RESET + " questions to study. "
         + ANSI_RED + "Please enter a valid number of questions: " + ANSI_RESET;
@@ -98,7 +98,7 @@ class StudySessionViewTest {
    */
   @Test
   public void testGenerating() {
-    studySessionView.generated();
+    studySessionConsoleView.generated();
     String generating = """
         Hold tight! Generating and randomizing questions...
         """.replaceAll("\\n|\\r\\n", System.getProperty("line.separator"));
@@ -110,7 +110,7 @@ class StudySessionViewTest {
    */
   @Test
   public void testOptions() {
-    studySessionView.options();
+    studySessionConsoleView.options();
     String options = ("Options: [" + ANSI_RED + "H" + ANSI_RESET + "] Set Hard ["
         + ANSI_GREEN + "E" + ANSI_RESET + "] Set Easy [" + ANSI_CYAN + "A" + ANSI_RESET
         + "] See Answer [" + ANSI_RED + "T" + ANSI_RESET + "] Terminate\n").replaceAll("\\n|\\r\\n",
@@ -123,7 +123,7 @@ class StudySessionViewTest {
    */
   @Test
   public void testDisplayQuestion() {
-    studySessionView.displayQuestion(testQuestion, 0);
+    studySessionConsoleView.displayQuestion(testQuestion, 0);
     String question = ANSI_RED + "1. Test question?" + ANSI_RESET + " ";
     assertEquals(question, output.toString());
   }
@@ -133,7 +133,7 @@ class StudySessionViewTest {
    */
   @Test
   public void testSeparator() {
-    studySessionView.separator();
+    studySessionConsoleView.separator();
     String separator = """
         ----------------------------------------------------------
         """.replaceAll("\\n|\\r\\n", System.getProperty("line.separator"));
@@ -145,7 +145,7 @@ class StudySessionViewTest {
    */
   @Test
   public void testAnswer() {
-    studySessionView.answer(testQuestion);
+    studySessionConsoleView.answer(testQuestion);
     String answer = """
         Answer:Answer
         """.replaceAll("\\n|\\r\\n", System.getProperty("line.separator"));
@@ -158,7 +158,7 @@ class StudySessionViewTest {
   @Test
   public void testCustom() {
     String custom = "This is a custom message\n";
-    studySessionView.custom(custom);
+    studySessionConsoleView.custom(custom);
     assertEquals(custom, output.toString());
   }
 
@@ -167,7 +167,7 @@ class StudySessionViewTest {
    */
   @Test
   public void testGoodbye() {
-    studySessionView.goodbye();
+    studySessionConsoleView.goodbye();
     String goodbye = (ANSI_CYAN
         + "Thanks for studying! Have a great day!" + ANSI_RESET + "\n").replaceAll(
         "\\n|\\r\\n", System.getProperty("line.separator"));

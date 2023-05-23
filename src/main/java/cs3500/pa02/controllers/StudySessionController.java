@@ -8,7 +8,7 @@ import cs3500.pa02.questionutilities.Question;
 import cs3500.pa02.questionutilities.RandomizeQuestions;
 import cs3500.pa02.questionutilities.ReadAsQuestions;
 import cs3500.pa02.readers.InputReader;
-import cs3500.pa02.views.StudySessionView;
+import cs3500.pa02.views.StudySessionConsoleView;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.util.ArrayList;
@@ -18,7 +18,7 @@ import java.util.ArrayList;
  */
 public class StudySessionController implements Controller {
 
-  private final StudySessionView studySessionView = new StudySessionView();
+  private final StudySessionConsoleView studySessionConsoleView = new StudySessionConsoleView();
   private final InputReader inputReader = new InputReader(System.in);
   private State state = State.InitialInputPhase;
   private StudySessionModel studySessionModel;
@@ -30,12 +30,12 @@ public class StudySessionController implements Controller {
    * Initiates the controller
    */
   public void run() {
-    studySessionView.welcome();
+    studySessionConsoleView.welcome();
     acceptPath();
-    studySessionView.generated();
+    studySessionConsoleView.generated();
     generateQuestions(inputPath);
     acceptNumQuestions();
-    studySessionView.begin();
+    studySessionConsoleView.begin();
     studySessionModel = new StudySessionModel(questions, numQuestions);
     setState(State.StudySession);
     studySession();
@@ -48,7 +48,7 @@ public class StudySessionController implements Controller {
     String input = inputReader.read();
     this.inputPath = Path.of(input);
     while (!this.inputPath.toFile().exists() || !this.inputPath.toString().endsWith(".sr")) {
-      studySessionView.invalidPath();
+      studySessionConsoleView.invalidPath();
       input = inputReader.read();
       this.inputPath = Path.of(input);
     }
@@ -58,19 +58,19 @@ public class StudySessionController implements Controller {
    * Accepts a valid number of questions from the user
    */
   private void acceptNumQuestions() {
-    studySessionView.initialPrompt();
+    studySessionConsoleView.initialPrompt();
     String input = inputReader.read();
     while (true) {
       try {
         this.numQuestions = Integer.parseInt(input);
         if (this.numQuestions < 1) {
-          studySessionView.invalidNumberPrompt(questions.size());
+          studySessionConsoleView.invalidNumberPrompt(questions.size());
           input = inputReader.read();
         } else {
           break;
         }
       } catch (NumberFormatException e) {
-        studySessionView.invalidNumberPrompt(questions.size());
+        studySessionConsoleView.invalidNumberPrompt(questions.size());
         input = inputReader.read();
       }
     }
@@ -92,13 +92,13 @@ public class StudySessionController implements Controller {
    * Runs the study session
    */
   private void studySession() {
-    studySessionView.options();
+    studySessionConsoleView.options();
     while (state.equals(State.StudySession)) {
       try {
         Question next = studySessionModel.nextQuestion();
         int currentQuestion = studySessionModel.getCurrent();
-        studySessionView.separator();
-        studySessionView.displayQuestion(next, currentQuestion);
+        studySessionConsoleView.separator();
+        studySessionConsoleView.displayQuestion(next, currentQuestion);
         String input = inputReader.read();
         handleInput(input, next);
       } catch (IllegalArgumentException e) {
@@ -125,12 +125,12 @@ public class StudySessionController implements Controller {
         studySessionModel.incrementQuestions();
       }
       case Answer -> {
-        studySessionView.answer(current);
+        studySessionConsoleView.answer(current);
         studySessionModel.incrementQuestions();
       }
       case Terminate -> end();
       default -> {
-        studySessionView.options();
+        studySessionConsoleView.options();
         handleInput(inputReader.read(), current);
       }
     }
@@ -156,11 +156,11 @@ public class StudySessionController implements Controller {
     } catch (IOException e) {
       throw new RuntimeException(e);
     }
-    studySessionView.separator();
+    studySessionConsoleView.separator();
     String stats = studySessionModel.packageStats(formatQuestions.getNumHard(),
         formatQuestions.getNumEasy());
-    studySessionView.custom(stats);
-    studySessionView.goodbye();
+    studySessionConsoleView.custom(stats);
+    studySessionConsoleView.goodbye();
   }
 
 }
