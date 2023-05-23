@@ -19,7 +19,7 @@ import org.junit.jupiter.api.Test;
 /**
  * Class for testing the FileTypeVisitor class and its associated methods
  */
-class FileTypeVisitorTest {
+class FileTypeVisitorTest extends FileUtilitiesTest {
 
   private Path path;
   private ArrayList<File> mdFiles;
@@ -37,12 +37,8 @@ class FileTypeVisitorTest {
   public void setup() {
     path = Path.of("src/tests/resources/notes-root");
     Path arraysPath = Path.of("src/tests/resources/notes-root/arrays.md");
-    File arrays = arraysPath.toFile();
     File notes = Path.of("src/tests/resources/notes-root/notes.pdf").toFile();
-    File test = Path.of("src/tests/resources/notes-root/test.md").toFile();
-    File vectors = Path.of("src/tests/resources/notes-root/vectors.md").toFile();
     File duedates = Path.of("src/tests/resources/notes-root/lecture-notes/duedates.pdf").toFile();
-    File java = Path.of("src/tests/resources/notes-root/lecture-notes/java.md").toFile();
     mdFiles = new ArrayList<>(Arrays.asList(arrays, java, test, vectors));
     bothFiles = new ArrayList<>(Arrays.asList(arrays, duedates, java, notes, test, vectors));
     ArrayList<String> onlyMd = new ArrayList<>(List.of(".md"));

@@ -3,7 +3,6 @@ package cs3500.pa02.questionutilities;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-import cs3500.pa02.Difficulty;
 import java.io.File;
 import java.nio.file.Path;
 import java.util.ArrayList;
@@ -14,7 +13,7 @@ import org.junit.jupiter.api.Test;
 /**
  * Class for testing ReadAsQuestions and its associated methods
  */
-class ReadAsQuestionsTest {
+class ReadAsQuestionsTest extends QuestionUtilitiesTest {
 
   private File notSr;
   private ReadAsQuestions readAsQuestionsThrows;
@@ -35,14 +34,6 @@ class ReadAsQuestionsTest {
     readAsQuestionsThrows = new ReadAsQuestions(edgeCases);
     nonexistentReader = new ReadAsQuestions(nonexistent);
     questions = readAsQuestions.generateListOfQuestions();
-    Question arraysOne = new Question("Where are arrays stored in memory?",
-        "the heap", Difficulty.HARD);
-    Question arraysTwo = new Question("T/F Arrays can hold multiple data types",
-        "false", Difficulty.HARD);
-    Question test = new Question("This is a test question",
-        "answer", Difficulty.HARD);
-    Question vector = new Question("Which method can resize a vector?",
-        "setSize(int size)", Difficulty.HARD);
     sampleQuestions = new ArrayList<>(Arrays.asList(arraysOne, arraysTwo, test, vector));
   }
 

@@ -7,42 +7,13 @@ import org.junit.jupiter.api.Test;
 /**
  * Class for testing FormatFiles and its associated methods
  */
-class StudyGuideTest {
+class StudyGuideTest extends FileFormattersTest {
 
   /**
    * Tests for the summarizeContent method
    */
   @Test
   public void testExtract() {
-    String arraysAndTest = """ 
-        # This is a test file
-                
-        ## Heading
-                
-        # Java Arrays
-        - [[An **array** is a collection of variables of the same type]], referred to
-          by a common name.
-        - In Java, arrays are objects, and must be created dynamically (at runtime).
-                
-        ## Declaring an Array
-        - [[General Form: type[] arrayName;]]
-        - ex: int[] myData;
-        - [[T/F An array's size can be changed:::false]]
-                
-        - The above only creates a reference to an array object, but no array has
-          actually been created yet.
-                
-        ## Creating an Array (Instantiation)
-        - [[General form:  arrayName = new type[numberOfElements];]]
-        - ex: myData = new int[100];
-                
-        - Data types of the reference and array need to match.
-        - [[numberOfElements must be a positive Integer.]]
-        - [[Gotcha: Array size is not modifiable once instantiated. ]]
-                
-        ... more brilliance captured...\s
-                
-        """;
     StudyGuide arrays = new StudyGuide(arraysAndTest);
     String allCombined = """
         # Java Arrays
@@ -115,6 +86,7 @@ class StudyGuideTest {
         - General form:  arrayName = new type[numberOfElements];
         - numberOfElements must be a positive Integer.
         - Gotcha: Array size is not modifiable once instantiated.\s
+        -  T/F Testing with two colons ::
         """;
     assertEquals(arraysAndTestSummarized, arrays.extract());
     StudyGuide all = new StudyGuide(allCombined);

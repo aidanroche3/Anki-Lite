@@ -15,25 +15,16 @@ import org.junit.jupiter.api.Test;
 /**
  * Class for testing MarkDownFile and its associated methods
  */
-class MarkDownFileTest {
+class MarkDownFileTest extends FileUtilitiesTest {
 
-  private File arrays;
-  private File test;
-  private File vectors;
   private File invalidFormat;
   private File invalidPath;
-  private MarkDownFile arraysMd;
-  private MarkDownFile testMd;
-  private MarkDownFile vectorsMd;
 
   /**
    * Initializes the date for each test
    */
   @BeforeEach
   public void setup() {
-    arrays = Path.of("src/tests/resources/notes-root/arrays.md").toFile();
-    test = Path.of("src/tests/resources/notes-root/test.md").toFile();
-    vectors = Path.of("src/tests/resources/notes-root/vectors.md").toFile();
     invalidFormat = Path.of("src/tests/resources/notes-root/invalid.pdf").toFile();
     invalidPath = Path.of("src/tests/resources/notes-root/invalid.md").toFile();
     arraysMd = new MarkDownFile(arrays);

@@ -11,7 +11,7 @@ import org.junit.jupiter.api.Test;
 /**
  * Class for testing RandomizeQuestions and its associated methods
  */
-class RandomizeQuestionsTest {
+class RandomizeQuestionsTest extends QuestionUtilitiesTest {
 
   private RandomizeQuestions randomizeQuestions;
 
@@ -20,14 +20,8 @@ class RandomizeQuestionsTest {
    */
   @BeforeEach
   public void setup() {
-    Question arraysOne = new Question("Where are arrays stored in memory?",
-        "the heap", Difficulty.HARD);
-    Question arraysTwo = new Question("T/F Arrays can hold multiple data types",
-        "false", Difficulty.EASY);
-    Question test = new Question("This is a test question",
-        "answer", Difficulty.HARD);
-    Question vector = new Question("Which method can resize a vector?",
-        "setSize(int size)", Difficulty.EASY);
+    test.setDifficulty(Difficulty.EASY);
+    vector.setDifficulty(Difficulty.EASY);
     ArrayList<Question> sampleQuestions =
         new ArrayList<>(Arrays.asList(arraysOne, arraysTwo, test, vector));
     randomizeQuestions = new RandomizeQuestions(sampleQuestions);

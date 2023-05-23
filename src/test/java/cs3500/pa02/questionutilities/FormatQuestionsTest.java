@@ -11,7 +11,7 @@ import org.junit.jupiter.api.Test;
 /**
  * Class for testing FormatQuestions and its associated methods
  */
-class FormatQuestionsTest {
+class FormatQuestionsTest extends QuestionUtilitiesTest {
 
   private String content;
   private FormatQuestions formatQuestions;
@@ -21,14 +21,7 @@ class FormatQuestionsTest {
    */
   @BeforeEach
   public void setup() {
-    Question arraysOne = new Question("Where are arrays stored in memory?",
-        "the heap", Difficulty.HARD);
-    Question arraysTwo = new Question("T/F Arrays can hold multiple data types",
-        "false", Difficulty.HARD);
-    Question test = new Question("This is a test question",
-        "answer", Difficulty.EASY);
-    Question vector = new Question("Which method can resize a vector?",
-        "setSize(int size)", Difficulty.HARD);
+    test.setDifficulty(Difficulty.EASY);
     ArrayList<Question> sampleQuestions =
         new ArrayList<>(Arrays.asList(arraysOne, arraysTwo, test, vector));
     content = """

@@ -19,7 +19,7 @@ import org.junit.jupiter.api.Test;
 /**
  * Class for testing FileListSorter abd its associated methods
  */
-class FileListSorterTest {
+class FileListSorterTest extends FileUtilitiesTest {
 
   private ArrayList<MarkDownFile> mdFiles;
   private ArrayList<MarkDownFile> name;
@@ -33,13 +33,6 @@ class FileListSorterTest {
     Path path = Path.of("src/tests/resources/notes-root");
     ArrayList<String> validTypes = new ArrayList<>(List.of(".md"));
     FileTypeVisitor visitor = new FileTypeVisitor(validTypes);
-    File arrays = Path.of("src/tests/resources/notes-root/arrays.md").toFile();
-    File test = Path.of("src/tests/resources/notes-root/test.md").toFile();
-    File vectors = Path.of("src/tests/resources/notes-root/vectors.md").toFile();
-    File java = Path.of("src/tests/resources/notes-root/lecture-notes/java.md").toFile();
-    MarkDownFile arraysMd;
-    MarkDownFile testMd;
-    MarkDownFile vectorsMd;
     MarkDownFile javaMd;
     try {
       FileTime arraysCreated =

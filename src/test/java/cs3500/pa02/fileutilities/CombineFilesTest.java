@@ -13,7 +13,7 @@ import org.junit.jupiter.api.Test;
 /**
  * Test class for CombineFiles and its associated methods
  */
-class CombineFilesTest {
+class CombineFilesTest extends FileUtilitiesTest {
 
   private ArrayList<File> twoFiles;
   private ArrayList<File> files;
@@ -26,10 +26,6 @@ class CombineFilesTest {
    */
   @BeforeEach
   public void setup() {
-    File arrays = Path.of("src/tests/resources/notes-root/arrays.md").toFile();
-    File test = Path.of("src/tests/resources/notes-root/test.md").toFile();
-    File vectors = Path.of("src/tests/resources/notes-root/vectors.md").toFile();
-    File java = Path.of("src/tests/resources/notes-root/lecture-notes/java.md").toFile();
     File fake = Path.of("src/tests/resources/notes-root/nonexistent.md").toFile();
     twoFiles = new ArrayList<>(Arrays.asList(test, arrays));
     files = new ArrayList<>(Arrays.asList(arrays, test, vectors, java));
