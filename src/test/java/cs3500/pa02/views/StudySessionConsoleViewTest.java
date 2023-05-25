@@ -1,6 +1,7 @@
 package cs3500.pa02.views;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import cs3500.pa02.Difficulty;
 import cs3500.pa02.questionutilities.Question;
@@ -20,6 +21,7 @@ class StudySessionConsoleViewTest {
 
   private StringBuilder output;
   private StudySessionConsoleView studySessionConsoleView;
+  private StudySessionConsoleView mockView;
   private Question testQuestionHard;
   private Question testQuestionEasy;
 
@@ -29,7 +31,9 @@ class StudySessionConsoleViewTest {
   @BeforeEach
   public void setup() {
     output = new StringBuilder();
+    MockAppendable mock = new MockAppendable();
     studySessionConsoleView = new StudySessionConsoleView(output);
+    mockView = new StudySessionConsoleView(mock);
     testQuestionHard = new Question("Test question?", "Answer", Difficulty.HARD);
     testQuestionEasy = new Question("Test question?", "Answer", Difficulty.EASY);
   }
@@ -45,6 +49,7 @@ class StudySessionConsoleViewTest {
         + "To begin, input a valid .sr file to study from: ").replaceAll(
             "\\n|\\r\\n", System.getProperty("line.separator"));
     assertEquals(welcome, output.toString());
+    assertThrows(RuntimeException.class, () -> mockView.welcome());
   }
 
   /**
@@ -56,6 +61,7 @@ class StudySessionConsoleViewTest {
     String begin = (ANSI_CYAN + "Great! Let's begin!" + ANSI_RESET + "\n\n")
         .replaceAll("\\n|\\r\\n", System.getProperty("line.separator"));
     assertEquals(begin, output.toString());
+    assertThrows(RuntimeException.class, () -> mockView.begin());
   }
 
   /**
@@ -66,6 +72,7 @@ class StudySessionConsoleViewTest {
     studySessionConsoleView.invalidPath();
     String invalidPath = ANSI_RED + "Please enter a valid path to a .sr file: " + ANSI_RESET;
     assertEquals(invalidPath, output.toString());
+    assertThrows(RuntimeException.class, () -> mockView.invalidPath());
   }
 
   /**
@@ -76,6 +83,7 @@ class StudySessionConsoleViewTest {
     studySessionConsoleView.initialPrompt();
     String initialPrompt = "How many questions would you like to study? ";
     assertEquals(initialPrompt, output.toString());
+    assertThrows(RuntimeException.class, () -> mockView.initialPrompt());
   }
 
   /**
@@ -88,18 +96,20 @@ class StudySessionConsoleViewTest {
         + ANSI_RESET + " questions to study. "
         + ANSI_RED + "Please enter a valid number of questions: " + ANSI_RESET;
     assertEquals(invalidNumberPrompt, output.toString());
+    assertThrows(RuntimeException.class, () -> mockView.invalidNumberPrompt(3));
   }
 
   /**
-   * Tests the generating method
+   * Tests the generated method
    */
   @Test
-  public void testGenerating() {
+  public void testGenerated() {
     studySessionConsoleView.generated();
     String generating = """
         Hold tight! Generating and randomizing questions...
         """.replaceAll("\\n|\\r\\n", System.getProperty("line.separator"));
     assertEquals(generating, output.toString());
+    assertThrows(RuntimeException.class, () -> mockView.generated());
   }
 
   /**
@@ -113,6 +123,7 @@ class StudySessionConsoleViewTest {
         + "] See Answer [" + ANSI_RED + "T" + ANSI_RESET + "] Terminate\n").replaceAll("\\n|\\r\\n",
         System.getProperty("line.separator"));
     assertEquals(options, output.toString());
+    assertThrows(RuntimeException.class, () -> mockView.options());
   }
 
   /**
@@ -128,6 +139,9 @@ class StudySessionConsoleViewTest {
     studySessionConsoleView.displayQuestion(testQuestionEasy, 2);
     String questionEasy = ANSI_GREEN + "3. Test question?" + ANSI_RESET + " ";
     assertEquals(questionEasy, output.toString());
+    assertThrows(RuntimeException.class, () -> mockView.displayQuestion(testQuestionHard, 2));
+    assertThrows(RuntimeException.class, () -> mockView.displayQuestion(testQuestionEasy, 2));
+
   }
 
   /**
@@ -139,6 +153,7 @@ class StudySessionConsoleViewTest {
     String separator = "----------------------------------------------------------\n".replaceAll(
         "\\n|\\r\\n", System.getProperty("line.separator"));
     assertEquals(separator, output.toString());
+    assertThrows(RuntimeException.class, () -> mockView.separator());
   }
 
   /**
@@ -151,6 +166,7 @@ class StudySessionConsoleViewTest {
         Answer:Answer
         """.replaceAll("\\n|\\r\\n", System.getProperty("line.separator"));
     assertEquals(answer, output.toString());
+    assertThrows(RuntimeException.class, () -> mockView.answer(testQuestionEasy));
   }
 
   /**
@@ -161,6 +177,7 @@ class StudySessionConsoleViewTest {
     String custom = "This is a custom message\n";
     studySessionConsoleView.custom(custom);
     assertEquals(custom, output.toString());
+    assertThrows(RuntimeException.class, () -> mockView.custom(""));
   }
 
   /**
@@ -173,6 +190,7 @@ class StudySessionConsoleViewTest {
         + "Thanks for studying! Have a great day!" + ANSI_RESET + "\n").replaceAll(
         "\\n|\\r\\n", System.getProperty("line.separator"));
     assertEquals(goodbye, output.toString());
+    assertThrows(RuntimeException.class, () -> mockView.goodbye());
   }
 
 }
