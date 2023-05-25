@@ -159,6 +159,7 @@ public class StudySessionController implements Controller {
    */
   private void end() {
     setState(State.Stats);
+    inputReader.close();
     FormatQuestions formatQuestions = new FormatQuestions(questions);
     String srFormat = formatQuestions.formatAsSr();
     WriteFilesToPath writeFilesToPath = new WriteFilesToPath();

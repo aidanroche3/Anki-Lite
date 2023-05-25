@@ -28,4 +28,11 @@ public class InputReader implements Reader {
     return consoleScanner.nextLine();
   }
 
+  /**
+   * Closes the input reader
+   */
+  public void close() {
+    consoleScanner.close();
+  }
+
 }
