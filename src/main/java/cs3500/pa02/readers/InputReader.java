@@ -1,6 +1,5 @@
 package cs3500.pa02.readers;
 
-import java.io.InputStream;
 import java.util.Scanner;
 
 /**
@@ -15,7 +14,7 @@ public class InputReader implements Reader {
    *
    * @param stream the stream to read from
    */
-  public InputReader(InputStream stream) {
+  public InputReader(Readable stream) {
     this.consoleScanner = new Scanner(stream);
   }
 

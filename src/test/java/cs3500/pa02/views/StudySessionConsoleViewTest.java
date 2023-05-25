@@ -4,9 +4,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import cs3500.pa02.Difficulty;
 import cs3500.pa02.questionutilities.Question;
-import java.io.ByteArrayOutputStream;
-import java.io.PrintStream;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -21,20 +18,20 @@ class StudySessionConsoleViewTest {
   public static final String ANSI_GREEN = "\u001B[32m";
   public static final String ANSI_CYAN = "\u001B[36m";
 
-  private final ByteArrayOutputStream output = new ByteArrayOutputStream();
-  private PrintStream sysOut;
+  private StringBuilder output;
   private StudySessionConsoleView studySessionConsoleView;
-  private Question testQuestion;
+  private Question testQuestionHard;
+  private Question testQuestionEasy;
 
   /**
    * Initiates the test data
    */
   @BeforeEach
   public void setup() {
-    sysOut = System.out;
-    System.setOut(new PrintStream(output));
-    studySessionConsoleView = new StudySessionConsoleView();
-    testQuestion = new Question("Test question?", "Answer", Difficulty.HARD);
+    output = new StringBuilder();
+    studySessionConsoleView = new StudySessionConsoleView(output);
+    testQuestionHard = new Question("Test question?", "Answer", Difficulty.HARD);
+    testQuestionEasy = new Question("Test question?", "Answer", Difficulty.EASY);
   }
 
 
@@ -123,9 +120,14 @@ class StudySessionConsoleViewTest {
    */
   @Test
   public void testDisplayQuestion() {
-    studySessionConsoleView.displayQuestion(testQuestion, 0);
-    String question = ANSI_RED + "1. Test question?" + ANSI_RESET + " ";
-    assertEquals(question, output.toString());
+    studySessionConsoleView.displayQuestion(testQuestionHard, 0);
+    String questionHard = ANSI_RED + "1. Test question?" + ANSI_RESET + " ";
+    assertEquals(questionHard, output.toString());
+    output = new StringBuilder();
+    studySessionConsoleView = new StudySessionConsoleView(output);
+    studySessionConsoleView.displayQuestion(testQuestionEasy, 2);
+    String questionEasy = ANSI_GREEN + "3. Test question?" + ANSI_RESET + " ";
+    assertEquals(questionEasy, output.toString());
   }
 
   /**
@@ -134,9 +136,8 @@ class StudySessionConsoleViewTest {
   @Test
   public void testSeparator() {
     studySessionConsoleView.separator();
-    String separator = """
-        ----------------------------------------------------------
-        """.replaceAll("\\n|\\r\\n", System.getProperty("line.separator"));
+    String separator = "----------------------------------------------------------\n".replaceAll(
+        "\\n|\\r\\n", System.getProperty("line.separator"));
     assertEquals(separator, output.toString());
   }
 
@@ -145,7 +146,7 @@ class StudySessionConsoleViewTest {
    */
   @Test
   public void testAnswer() {
-    studySessionConsoleView.answer(testQuestion);
+    studySessionConsoleView.answer(testQuestionHard);
     String answer = """
         Answer:Answer
         """.replaceAll("\\n|\\r\\n", System.getProperty("line.separator"));
@@ -174,11 +175,4 @@ class StudySessionConsoleViewTest {
     assertEquals(goodbye, output.toString());
   }
 
-  /**
-   * Restores the streams
-   */
-  @AfterEach
-  public void restore() {
-    System.setOut(sysOut);
-  }
 }

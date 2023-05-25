@@ -18,13 +18,24 @@ import java.util.ArrayList;
  */
 public class StudySessionController implements Controller {
 
-  private final StudySessionConsoleView studySessionConsoleView = new StudySessionConsoleView();
-  private final InputReader inputReader = new InputReader(System.in);
+  private final StudySessionConsoleView studySessionConsoleView;
+  private final InputReader inputReader;
   private State state = State.InitialInputPhase;
   private StudySessionModel studySessionModel;
   private Path inputPath;
   private ArrayList<Question> questions;
   private int numQuestions;
+
+  /**
+   * Instantiates a StudySessionController
+   *
+   * @param readable a readable to read input from
+   * @param appendable an appendable to append the output to
+   */
+  public StudySessionController(Readable readable, Appendable appendable) {
+    this.inputReader = new InputReader(readable);
+    this.studySessionConsoleView = new StudySessionConsoleView(appendable);
+  }
 
   /**
    * Initiates the controller

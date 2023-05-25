@@ -2,6 +2,7 @@ package cs3500.pa02;
 
 import cs3500.pa02.controllers.StudyGuideController;
 import cs3500.pa02.controllers.StudySessionController;
+import java.io.InputStreamReader;
 
 /**
  * This is the main driver of this project.
@@ -21,7 +22,7 @@ public class Driver {
     // initiates the correct mode
     switch (args.length) {
       case 3 -> new StudyGuideController(args).run();
-      case 0 -> new StudySessionController().run();
+      case 0 -> new StudySessionController(new InputStreamReader(System.in), System.out).run();
       default -> throw new IllegalArgumentException("Please provide valid root path, "
           + "order flag, and output path for study guide or zero arguments for study session.");
     }

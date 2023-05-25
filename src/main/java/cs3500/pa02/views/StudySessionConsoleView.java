@@ -2,6 +2,7 @@ package cs3500.pa02.views;
 
 import cs3500.pa02.Difficulty;
 import cs3500.pa02.questionutilities.Question;
+import java.io.IOException;
 
 /**
  * Class for displaying the view of the study session
@@ -26,15 +27,30 @@ public class StudySessionConsoleView implements StudySessionView {
    * ANSI cyan color
    */
   public static final String ANSI_CYAN = "\u001B[36m";
+  private final Appendable appendable;
+
+  /**
+   * Instantiates a StudySessionConsoleView
+   *
+   * @param appendable where to append the output
+   */
+  public StudySessionConsoleView(Appendable appendable) {
+    this.appendable = appendable;
+  }
 
   /**
    * Displays the welcome message
    */
   @Override
   public void welcome() {
-    System.out.println();
-    System.out.println(ANSI_CYAN + "Welcome to Anki-Lite!" + ANSI_RESET);
-    System.out.print("To begin, input a valid .sr file to study from: ");
+    try {
+      appendable.append(System.getProperty("line.separator"));
+      appendable.append(ANSI_CYAN + "Welcome to Anki-Lite!" + ANSI_RESET);
+      appendable.append(System.getProperty("line.separator"));
+      appendable.append("To begin, input a valid .sr file to study from: ");
+    } catch (IOException e) {
+      throw new RuntimeException(e);
+    }
   }
 
   /**
@@ -42,8 +58,13 @@ public class StudySessionConsoleView implements StudySessionView {
    */
   @Override
   public void begin() {
-    System.out.println(ANSI_CYAN + "Great! Let's begin!" + ANSI_RESET);
-    System.out.println();
+    try {
+      appendable.append(ANSI_CYAN + "Great! Let's begin!" + ANSI_RESET);
+      appendable.append(System.getProperty("line.separator"));
+      appendable.append(System.getProperty("line.separator"));
+    } catch (IOException e) {
+      throw new RuntimeException(e);
+    }
   }
 
   /**
@@ -51,7 +72,11 @@ public class StudySessionConsoleView implements StudySessionView {
    */
   @Override
   public void invalidPath() {
-    System.out.print(ANSI_RED + "Please enter a valid path to a .sr file: " + ANSI_RESET);
+    try {
+      appendable.append(ANSI_RED + "Please enter a valid path to a .sr file: " + ANSI_RESET);
+    } catch (IOException e) {
+      throw new RuntimeException(e);
+    }
   }
 
   /**
@@ -59,7 +84,11 @@ public class StudySessionConsoleView implements StudySessionView {
    */
   @Override
   public void initialPrompt() {
-    System.out.print("How many questions would you like to study? ");
+    try {
+      appendable.append("How many questions would you like to study? ");
+    } catch (IOException e) {
+      throw new RuntimeException(e);
+    }
   }
 
   /**
@@ -69,8 +98,13 @@ public class StudySessionConsoleView implements StudySessionView {
    */
   @Override
   public void invalidNumberPrompt(int numQuestions) {
-    System.out.print("There are " + ANSI_CYAN + numQuestions + ANSI_RESET + " questions to study. "
-        + ANSI_RED + "Please enter a valid number of questions: " + ANSI_RESET);
+    try {
+      appendable.append("There are " + ANSI_CYAN).append(String.valueOf(numQuestions))
+          .append(ANSI_RESET).append(" questions to study. ").append(ANSI_RED)
+          .append("Please enter a valid number of questions: ").append(ANSI_RESET);
+    } catch (IOException e) {
+      throw new RuntimeException(e);
+    }
   }
 
   /**
@@ -78,7 +112,12 @@ public class StudySessionConsoleView implements StudySessionView {
    */
   @Override
   public void generated() {
-    System.out.println("Hold tight! Generating and randomizing questions...");
+    try {
+      appendable.append("Hold tight! Generating and randomizing questions...");
+      appendable.append(System.getProperty("line.separator"));
+    } catch (IOException e) {
+      throw new RuntimeException(e);
+    }
   }
 
   /**
@@ -86,11 +125,16 @@ public class StudySessionConsoleView implements StudySessionView {
    */
   @Override
   public void options() {
-    System.out.println("Options: ["
-        + ANSI_RED + "H" + ANSI_RESET + "] Set Hard ["
-        + ANSI_GREEN + "E" + ANSI_RESET + "] Set Easy ["
-        + ANSI_CYAN + "A" + ANSI_RESET + "] See Answer ["
-        + ANSI_RED + "T" + ANSI_RESET + "] Terminate");
+    try {
+      appendable.append("Options: ["
+          + ANSI_RED + "H" + ANSI_RESET + "] Set Hard ["
+          + ANSI_GREEN + "E" + ANSI_RESET + "] Set Easy ["
+          + ANSI_CYAN + "A" + ANSI_RESET + "] See Answer ["
+          + ANSI_RED + "T" + ANSI_RESET + "] Terminate");
+      appendable.append(System.getProperty("line.separator"));
+    } catch (IOException e) {
+      throw new RuntimeException(e);
+    }
   }
 
   /**
@@ -102,11 +146,19 @@ public class StudySessionConsoleView implements StudySessionView {
   @Override
   public void displayQuestion(Question question, int currentQuestion) {
     if (question.getDifficulty().equals(Difficulty.HARD)) {
-      System.out.print(ANSI_RED + (currentQuestion + 1)
-          + ". " + question.getQuestion() + ANSI_RESET + " ");
+      try {
+        appendable.append(ANSI_RED).append(String.valueOf(currentQuestion + 1)).append(". ")
+            .append(question.getQuestion()).append(ANSI_RESET).append(" ");
+      } catch (IOException e) {
+        throw new RuntimeException(e);
+      }
     } else {
-      System.out.print(ANSI_GREEN + (currentQuestion + 1)
-          + ". " + question.getQuestion() + ANSI_RESET + " ");
+      try {
+        appendable.append(ANSI_GREEN).append(String.valueOf(currentQuestion + 1)).append(". ")
+            .append(question.getQuestion()).append(ANSI_RESET).append(" ");
+      } catch (IOException e) {
+        throw new RuntimeException(e);
+      }
     }
   }
 
@@ -114,7 +166,12 @@ public class StudySessionConsoleView implements StudySessionView {
    * Displays a separator
    */
   public void separator() {
-    System.out.println("----------------------------------------------------------");
+    try {
+      appendable.append("----------------------------------------------------------");
+      appendable.append(System.getProperty("line.separator"));
+    } catch (IOException e) {
+      throw new RuntimeException(e);
+    }
   }
 
   /**
@@ -124,7 +181,12 @@ public class StudySessionConsoleView implements StudySessionView {
    */
   @Override
   public void answer(Question question) {
-    System.out.println("Answer:" + question.getAnswer());
+    try {
+      appendable.append("Answer:").append(question.getAnswer());
+      appendable.append(System.getProperty("line.separator"));
+    } catch (IOException e) {
+      throw new RuntimeException(e);
+    }
   }
 
   /**
@@ -133,7 +195,11 @@ public class StudySessionConsoleView implements StudySessionView {
    * @param message a custom message to print
    */
   public void custom(String message) {
-    System.out.print(message);
+    try {
+      appendable.append(message);
+    } catch (IOException e) {
+      throw new RuntimeException(e);
+    }
   }
 
   /**
@@ -141,7 +207,12 @@ public class StudySessionConsoleView implements StudySessionView {
    */
   @Override
   public void goodbye() {
-    System.out.println(ANSI_CYAN + "Thanks for studying! Have a great day!" + ANSI_RESET);
+    try {
+      appendable.append(ANSI_CYAN + "Thanks for studying! Have a great day!" + ANSI_RESET);
+      appendable.append(System.getProperty("line.separator"));
+    } catch (IOException e) {
+      throw new RuntimeException(e);
+    }
   }
 
 }
